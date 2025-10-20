@@ -558,7 +558,7 @@ export default function Hunter({ user }) {
                   {user.is_admin && (
                     <button
                       data-testid={`delete-log-${log.id}`}
-                      onClick={() => handleDeleteLog(log.id)}
+                      onClick={() => openDeleteDialog('log', log.id, log.item_name)}
                       className="p-1 rounded hover:bg-[#8b7355] hover:bg-opacity-30 ml-2"
                       title="Eintrag löschen"
                     >
