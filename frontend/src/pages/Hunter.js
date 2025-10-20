@@ -381,12 +381,20 @@ export default function Hunter({ user }) {
                   ) : (
                     <>
                       <div className="flex justify-between items-start mb-2">
-                        <div>
+                        <div className="flex-1">
                           <h4 className="font-bold" style={{ color: '#3d2f1f' }}>{item.name}</h4>
                           <p className="text-sm" style={{ color: '#6d5838' }}>${item.price}</p>
                           <p className="text-sm" style={{ color: '#6d5838' }}>Bestand: {item.stock}</p>
                         </div>
                         <div className="flex gap-2">
+                          <button
+                            data-testid={`add-to-sale-${item.id}`}
+                            onClick={() => addSaleItem(item)}
+                            className="px-3 py-1 rounded text-sm rdr-button"
+                            title="Zum Verkauf hinzufügen"
+                          >
+                            Verkauf
+                          </button>
                           <button
                             data-testid={`edit-item-${item.id}`}
                             onClick={() => setEditingItem(item)}
