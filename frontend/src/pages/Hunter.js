@@ -282,51 +282,7 @@ export default function Hunter({ user }) {
                           </button>
                         </div>
                       </div>
-                      <div className="flex gap-2">
-                        <Input
-                          data-testid={`quantity-${item.id}`}
-                          type="number"
-                          placeholder="Menge"
-                          className="rdr-input flex-1"
-                          onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                              const qty = parseInt(e.target.value);
-                              if (qty) {
-                                handleStockChange(item.id, qty);
-                                e.target.value = '';
-                              }
-                            }
-                          }}
-                        />
-                        <Button
-                          data-testid={`add-stock-${item.id}`}
-                          onClick={(e) => {
-                            const input = e.target.closest('div').querySelector('input');
-                            const qty = parseInt(input.value);
-                            if (qty) {
-                              handleStockChange(item.id, qty);
-                              input.value = '';
-                            }
-                          }}
-                          className="rdr-button"
-                        >
-                          +
-                        </Button>
-                        <Button
-                          data-testid={`remove-stock-${item.id}`}
-                          onClick={(e) => {
-                            const input = e.target.closest('div').querySelector('input');
-                            const qty = parseInt(input.value);
-                            if (qty) {
-                              handleStockChange(item.id, -qty);
-                              input.value = '';
-                            }
-                          }}
-                          className="rdr-button"
-                        >
-                          -
-                        </Button>
-                      </div>
+                      <InventoryItemControls item={item} onStockChange={handleStockChange} />
                     </>
                   )}
                 </div>
