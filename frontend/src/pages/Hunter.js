@@ -285,7 +285,7 @@ export default function Hunter({ user }) {
       
       <div className="grid grid-cols-1 lg:grid-cols-[3fr_4fr_3fr_3fr] gap-6">
         {/* Left Column - Calculators */}
-        <div className="lg:col-span-3 space-y-6">
+        <div className="space-y-6">
           {/* Package Calculator */}
           <div className="rdr-card" data-testid="package-calculator">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>
