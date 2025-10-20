@@ -475,7 +475,7 @@ export default function Hunter({ user }) {
         </div>
 
         {/* Sales Calculator */}
-        <div className="lg:col-span-3">
+        <div>
           <div className="rdr-card">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Verkaufsrechner</h3>
             
