@@ -322,14 +322,16 @@ export default function Hunter({ user }) {
           <div className="rdr-card">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold" style={{ color: '#3d2f1f' }}>Bestandsliste</h3>
-              <Button
-                data-testid="add-item-button"
-                onClick={() => setShowAddForm(!showAddForm)}
-                className="rdr-button"
-              >
-                <Plus size={16} className="mr-1" />
-                Hinzufügen
-              </Button>
+              {user.is_admin && (
+                <Button
+                  data-testid="add-item-button"
+                  onClick={() => setShowAddForm(!showAddForm)}
+                  className="rdr-button"
+                >
+                  <Plus size={16} className="mr-1" />
+                  Hinzufügen
+                </Button>
+              )}
             </div>
 
             {showAddForm && (
