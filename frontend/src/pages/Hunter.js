@@ -280,7 +280,7 @@ export default function Hunter({ user }) {
   const crafting = calculateCrafting();
 
   return (
-    <div className="max-w-7xl mx-auto p-8">
+    <div className="w-full px-8 py-8">
       <h2 className="text-3xl font-bold mb-8" style={{ color: '#f4e8d0' }}>Hunter Bereich</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
