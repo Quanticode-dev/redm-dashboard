@@ -540,7 +540,7 @@ export default function Hunter({ user }) {
         </div>
 
         {/* Right Column - Protocol */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-3">
           <div className="rdr-card">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
             <div className="space-y-2 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
