@@ -306,6 +306,13 @@ async def get_protocol(current_user: dict = Depends(get_current_user)):
     logs = await db.protocol.find({}, {"_id": 0}).sort("timestamp", -1).to_list(1000)
     return logs
 
+@api_router.delete("/protocol/{log_id}")
+async def delete_protocol_log(log_id: str, admin_user: dict = Depends(get_admin_user)):
+    result = await db.protocol.delete_one({"id": log_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Log entry not found")
+    return {"message": "Log entry deleted successfully"}
+
 # Include router
 app.include_router(api_router)
 
