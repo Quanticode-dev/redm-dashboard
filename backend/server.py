@@ -97,6 +97,7 @@ class ProtocolLog(BaseModel):
     item_name: str
     action: str  # "added" or "removed"
     quantity: int
+    is_personal_use: bool = False  # For "Eigenbedarf"
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 # --- Helper Functions ---
