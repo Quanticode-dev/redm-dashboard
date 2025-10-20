@@ -455,7 +455,7 @@ export default function Hunter({ user }) {
                               </button>
                               <button
                                 data-testid={`delete-item-${item.id}`}
-                                onClick={() => handleDeleteItem(item.id)}
+                                onClick={() => openDeleteDialog('item', item.id, item.name)}
                                 className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
                                 title="Item löschen"
                               >
