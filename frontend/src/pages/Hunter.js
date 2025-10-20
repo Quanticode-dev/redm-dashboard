@@ -418,23 +418,27 @@ export default function Hunter({ user }) {
                           >
                             Verkauf
                           </button>
-                          <button
-                            data-testid={`edit-item-${item.id}`}
-                            onClick={() => setEditingItem(item)}
-                            className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
-                          >
-                            <Edit2 size={16} style={{ color: '#3d2f1f' }} />
-                          </button>
-                          <button
-                            data-testid={`delete-item-${item.id}`}
-                            onClick={() => handleDeleteItem(item.id)}
-                            className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
-                          >
-                            <Trash2 size={16} style={{ color: '#8b4513' }} />
-                          </button>
+                          {user.is_admin && (
+                            <>
+                              <button
+                                data-testid={`edit-item-${item.id}`}
+                                onClick={() => setEditingItem(item)}
+                                className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
+                              >
+                                <Edit2 size={16} style={{ color: '#3d2f1f' }} />
+                              </button>
+                              <button
+                                data-testid={`delete-item-${item.id}`}
+                                onClick={() => handleDeleteItem(item.id)}
+                                className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
+                              >
+                                <Trash2 size={16} style={{ color: '#8b4513' }} />
+                              </button>
+                            </>
+                          )}
                         </div>
                       </div>
-                      <InventoryItemControls item={item} onStockChange={handleStockChange} />
+                      {user.is_admin && <InventoryItemControls item={item} onStockChange={handleStockChange} />}
                     </>
                   )}
                 </div>
