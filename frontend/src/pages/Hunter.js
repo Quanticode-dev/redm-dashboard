@@ -426,6 +426,7 @@ export default function Hunter({ user }) {
                                 data-testid={`edit-item-${item.id}`}
                                 onClick={() => setEditingItem(item)}
                                 className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
+                                title="Item bearbeiten"
                               >
                                 <Edit2 size={16} style={{ color: '#3d2f1f' }} />
                               </button>
@@ -433,6 +434,7 @@ export default function Hunter({ user }) {
                                 data-testid={`delete-item-${item.id}`}
                                 onClick={() => handleDeleteItem(item.id)}
                                 className="p-2 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
+                                title="Item löschen"
                               >
                                 <Trash2 size={16} style={{ color: '#8b4513' }} />
                               </button>
