@@ -492,7 +492,7 @@ export default function Hunter({ user }) {
                           )}
                         </div>
                       </div>
-                      {user.is_admin && <InventoryItemControls item={item} onStockChange={handleStockChange} />}
+                      <InventoryItemControls item={item} onStockChange={handleStockChange} isAdmin={user.is_admin} />
                     </>
                   )}
                 </div>
