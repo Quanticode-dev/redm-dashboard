@@ -239,6 +239,21 @@ export default function Hunter({ user }) {
     }
   };
 
+  const handleDeleteLog = async (logId) => {
+    if (!user.is_admin) {
+      toast.error("Nur Admins können Protokoll-Einträge löschen");
+      return;
+    }
+    if (!window.confirm("Protokoll-Eintrag wirklich löschen?")) return;
+    try {
+      await axios.delete(`${API}/protocol/${logId}`);
+      toast.success("Eintrag gelöscht");
+      loadProtocol();
+    } catch (err) {
+      toast.error("Fehler beim Löschen");
+    }
+  };
+
   const crafting = calculateCrafting();
 
   return (
