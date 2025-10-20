@@ -156,6 +156,10 @@ export default function Hunter({ user }) {
   };
 
   const handleDeleteItem = async (id) => {
+    if (!user.is_admin) {
+      toast.error("Nur Admins können Items löschen");
+      return;
+    }
     if (!window.confirm("Item wirklich löschen?")) return;
     try {
       await axios.delete(`${API}/inventory/${id}`);
@@ -167,6 +171,10 @@ export default function Hunter({ user }) {
   };
 
   const handleStockChange = async (itemId, quantity) => {
+    if (!user.is_admin) {
+      toast.error("Nur Admins können den Bestand bearbeiten");
+      return;
+    }
     try {
       await axios.post(`${API}/inventory/stock`, { item_id: itemId, quantity });
       toast.success("Bestand aktualisiert");
