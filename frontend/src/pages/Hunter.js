@@ -21,20 +21,23 @@ import {
 // Component for inventory item controls
 function InventoryItemControls({ item, onStockChange }) {
   const [quantity, setQuantity] = useState("");
+  const [isPersonalUse, setIsPersonalUse] = useState(false);
 
   const handleAdd = () => {
     const qty = parseInt(quantity);
     if (qty && qty > 0) {
-      onStockChange(item.id, qty);
+      onStockChange(item.id, qty, false);
       setQuantity("");
+      setIsPersonalUse(false);
     }
   };
 
   const handleRemove = () => {
     const qty = parseInt(quantity);
     if (qty && qty > 0) {
-      onStockChange(item.id, -qty);
+      onStockChange(item.id, -qty, isPersonalUse);
       setQuantity("");
+      setIsPersonalUse(false);
     }
   };
 
@@ -45,30 +48,50 @@ function InventoryItemControls({ item, onStockChange }) {
   };
 
   return (
-    <div className="flex gap-2">
-      <Input
-        data-testid={`quantity-${item.id}`}
-        type="number"
-        placeholder="Menge"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-        onKeyPress={handleKeyPress}
-        className="rdr-input flex-1"
-      />
-      <Button
-        data-testid={`add-stock-${item.id}`}
-        onClick={handleAdd}
-        className="rdr-button"
-      >
-        +
-      </Button>
-      <Button
-        data-testid={`remove-stock-${item.id}`}
-        onClick={handleRemove}
-        className="rdr-button"
-      >
-        -
-      </Button>
+    <div className="space-y-2">
+      <div className="flex gap-2">
+        <Input
+          data-testid={`quantity-${item.id}`}
+          type="number"
+          placeholder="Menge"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          onKeyPress={handleKeyPress}
+          className="rdr-input flex-1"
+        />
+        <Button
+          data-testid={`add-stock-${item.id}`}
+          onClick={handleAdd}
+          className="rdr-button"
+        >
+          +
+        </Button>
+        <Button
+          data-testid={`remove-stock-${item.id}`}
+          onClick={handleRemove}
+          className="rdr-button"
+        >
+          -
+        </Button>
+      </div>
+      <div className="flex items-center gap-2 pl-2">
+        <input
+          type="checkbox"
+          id={`eigenbedarf-${item.id}`}
+          data-testid={`eigenbedarf-${item.id}`}
+          checked={isPersonalUse}
+          onChange={(e) => setIsPersonalUse(e.target.checked)}
+          className="w-4 h-4 rounded border-2 border-[#8b7355] cursor-pointer"
+          style={{ accentColor: '#8b7355' }}
+        />
+        <label 
+          htmlFor={`eigenbedarf-${item.id}`} 
+          className="text-xs cursor-pointer select-none"
+          style={{ color: '#6d5838' }}
+        >
+          Als Eigenbedarf markieren
+        </label>
+      </div>
     </div>
   );
 }
