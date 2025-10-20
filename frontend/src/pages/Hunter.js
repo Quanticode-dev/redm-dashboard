@@ -171,10 +171,10 @@ export default function Hunter({ user }) {
       toast.error("Nur Admins können Items löschen");
       return;
     }
-    if (!window.confirm("Item wirklich löschen?")) return;
     try {
       await axios.delete(`${API}/inventory/${id}`);
       toast.success("Item gelöscht");
+      setDeleteDialog({ open: false, type: null, id: null, name: "" });
       loadInventory();
     } catch (err) {
       toast.error("Fehler beim Löschen");
