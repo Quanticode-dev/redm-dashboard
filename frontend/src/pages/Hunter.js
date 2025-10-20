@@ -163,6 +163,8 @@ export default function Hunter({ user }) {
       bratwurst: bratwurstNeeded,
       dosenwurst: dosenwurstNeeded,
       materials: {
+        bratwurstCrafts,
+        dosenwurstCrafts,
         tierdarm,
         schweinefleisch,
         dose,
