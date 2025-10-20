@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { API } from "../App";
 import { Button } from "../components/ui/button";
@@ -7,6 +7,61 @@ import { Label } from "../components/ui/label";
 import { Card } from "../components/ui/card";
 import { toast } from "sonner";
 import { Plus, Edit2, Trash2, Package } from "lucide-react";
+
+// Component for inventory item controls
+function InventoryItemControls({ item, onStockChange }) {
+  const [quantity, setQuantity] = useState("");
+
+  const handleAdd = () => {
+    const qty = parseInt(quantity);
+    if (qty && qty > 0) {
+      onStockChange(item.id, qty);
+      setQuantity("");
+    }
+  };
+
+  const handleRemove = () => {
+    const qty = parseInt(quantity);
+    if (qty && qty > 0) {
+      onStockChange(item.id, -qty);
+      setQuantity("");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAdd();
+    }
+  };
+
+  return (
+    <div className="flex gap-2">
+      <Input
+        data-testid={`quantity-${item.id}`}
+        type="number"
+        placeholder="Menge"
+        value={quantity}
+        onChange={(e) => setQuantity(e.target.value)}
+        onKeyPress={handleKeyPress}
+        className="rdr-input flex-1"
+      />
+      <Button
+        data-testid={`add-stock-${item.id}`}
+        onClick={handleAdd}
+        className="rdr-button"
+      >
+        +
+      </Button>
+      <Button
+        data-testid={`remove-stock-${item.id}`}
+        onClick={handleRemove}
+        className="rdr-button"
+      >
+        -
+      </Button>
+    </div>
+  );
+}
 
 export default function Hunter({ user }) {
   const [inventory, setInventory] = useState([]);
