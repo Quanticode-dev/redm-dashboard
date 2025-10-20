@@ -256,30 +256,41 @@ export default function Hunter({ user }) {
 
             {showAddForm && (
               <div className="mb-4 p-4 rounded" style={{ background: 'rgba(139, 115, 85, 0.15)' }}>
+                <h4 className="font-bold mb-3" style={{ color: '#3d2f1f' }}>Neues Item hinzufügen</h4>
                 <div className="space-y-3">
-                  <Input
-                    data-testid="new-item-name"
-                    placeholder="Name"
-                    value={newItem.name}
-                    onChange={(e) => setNewItem({...newItem, name: e.target.value})}
-                    className="rdr-input"
-                  />
-                  <Input
-                    data-testid="new-item-price"
-                    type="number"
-                    placeholder="Preis"
-                    value={newItem.price}
-                    onChange={(e) => setNewItem({...newItem, price: parseFloat(e.target.value)})}
-                    className="rdr-input"
-                  />
-                  <Input
-                    data-testid="new-item-stock"
-                    type="number"
-                    placeholder="Bestand"
-                    value={newItem.stock}
-                    onChange={(e) => setNewItem({...newItem, stock: parseInt(e.target.value)})}
-                    className="rdr-input"
-                  />
+                  <div>
+                    <Label style={{ color: '#3d2f1f', fontWeight: 600 }}>Name</Label>
+                    <Input
+                      data-testid="new-item-name"
+                      placeholder="z.B. Wildfleisch"
+                      value={newItem.name}
+                      onChange={(e) => setNewItem({...newItem, name: e.target.value})}
+                      className="rdr-input"
+                    />
+                  </div>
+                  <div>
+                    <Label style={{ color: '#3d2f1f', fontWeight: 600 }}>Preis ($)</Label>
+                    <Input
+                      data-testid="new-item-price"
+                      type="number"
+                      step="0.01"
+                      placeholder="z.B. 15.50"
+                      value={newItem.price}
+                      onChange={(e) => setNewItem({...newItem, price: parseFloat(e.target.value)})}
+                      className="rdr-input"
+                    />
+                  </div>
+                  <div>
+                    <Label style={{ color: '#3d2f1f', fontWeight: 600 }}>Anfangsbestand (Menge)</Label>
+                    <Input
+                      data-testid="new-item-stock"
+                      type="number"
+                      placeholder="z.B. 100"
+                      value={newItem.stock}
+                      onChange={(e) => setNewItem({...newItem, stock: parseInt(e.target.value)})}
+                      className="rdr-input"
+                    />
+                  </div>
                   <Button data-testid="save-new-item" onClick={handleAddItem} className="rdr-button w-full">Speichern</Button>
                 </div>
               </div>
