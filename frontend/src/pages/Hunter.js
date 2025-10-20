@@ -177,6 +177,60 @@ export default function Hunter({ user }) {
     }
   };
 
+  const addSaleItem = (item) => {
+    const exists = saleItems.find(si => si.id === item.id);
+    if (!exists) {
+      setSaleItems([...saleItems, { ...item, saleQuantity: 1 }]);
+    }
+  };
+
+  const updateSaleQuantity = (itemId, quantity) => {
+    setSaleItems(saleItems.map(si => 
+      si.id === itemId ? { ...si, saleQuantity: parseInt(quantity) || 0 } : si
+    ));
+  };
+
+  const removeSaleItem = (itemId) => {
+    setSaleItems(saleItems.filter(si => si.id !== itemId));
+  };
+
+  const calculateSaleTotal = () => {
+    return saleItems.reduce((total, item) => total + (item.price * item.saleQuantity), 0).toFixed(2);
+  };
+
+  const handleSell = async () => {
+    if (saleItems.length === 0) {
+      toast.error("Keine Items zum Verkaufen");
+      return;
+    }
+
+    // Check if we have enough stock
+    for (const saleItem of saleItems) {
+      const currentItem = inventory.find(i => i.id === saleItem.id);
+      if (!currentItem || currentItem.stock < saleItem.saleQuantity) {
+        toast.error(`Nicht genug Bestand für ${saleItem.name}`);
+        return;
+      }
+    }
+
+    try {
+      // Remove stock for all items
+      for (const saleItem of saleItems) {
+        await axios.post(`${API}/inventory/stock`, { 
+          item_id: saleItem.id, 
+          quantity: -saleItem.saleQuantity 
+        });
+      }
+      
+      toast.success(`Verkauf abgeschlossen! Gesamt: $${calculateSaleTotal()}`);
+      setSaleItems([]);
+      loadInventory();
+      loadProtocol();
+    } catch (err) {
+      toast.error(err.response?.data?.detail || "Fehler beim Verkaufen");
+    }
+  };
+
   const crafting = calculateCrafting();
 
   return (
