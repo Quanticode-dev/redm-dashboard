@@ -204,13 +204,17 @@ export default function Hunter({ user }) {
     }
   };
 
-  const handleStockChange = async (itemId, quantity) => {
+  const handleStockChange = async (itemId, quantity, isPersonalUse = false) => {
     if (!user.is_admin) {
       toast.error("Nur Admins können den Bestand bearbeiten");
       return;
     }
     try {
-      await axios.post(`${API}/inventory/stock`, { item_id: itemId, quantity });
+      await axios.post(`${API}/inventory/stock`, { 
+        item_id: itemId, 
+        quantity,
+        is_personal_use: isPersonalUse
+      });
       toast.success("Bestand aktualisiert");
       loadInventory();
       loadProtocol();
