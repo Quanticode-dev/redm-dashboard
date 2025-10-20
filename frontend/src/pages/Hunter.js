@@ -81,6 +81,7 @@ export default function Hunter({ user }) {
   const [editingItem, setEditingItem] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [saleItems, setSaleItems] = useState([]);
+  const [deleteDialog, setDeleteDialog] = useState({ open: false, type: null, id: null, name: "" });
 
   useEffect(() => {
     loadInventory();
