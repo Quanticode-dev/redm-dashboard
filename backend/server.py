@@ -277,10 +277,6 @@ async def update_stock(stock_data: StockUpdate, current_user: dict = Depends(get
     if "hunter" not in current_user.get("permissions", []):
         raise HTTPException(status_code=403, detail="No permission for Hunter section")
     
-    # Only admins can add stock (positive quantity)
-    if stock_data.quantity > 0 and not current_user.get("is_admin"):
-        raise HTTPException(status_code=403, detail="Only admins can add stock")
-    
     item = await db.inventory.find_one({"id": stock_data.item_id}, {"_id": 0})
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
