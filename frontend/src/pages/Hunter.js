@@ -24,10 +24,6 @@ function InventoryItemControls({ item, onStockChange, isAdmin }) {
   const [isPersonalUse, setIsPersonalUse] = useState(false);
 
   const handleAdd = () => {
-    if (!isAdmin) {
-      toast.error("Nur Admins können Bestand hinzufügen");
-      return;
-    }
     const qty = parseInt(quantity);
     if (qty && qty > 0) {
       onStockChange(item.id, qty, false);
@@ -46,7 +42,7 @@ function InventoryItemControls({ item, onStockChange, isAdmin }) {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && isAdmin) {
+    if (e.key === 'Enter') {
       handleAdd();
     }
   };
@@ -63,15 +59,13 @@ function InventoryItemControls({ item, onStockChange, isAdmin }) {
           onKeyPress={handleKeyPress}
           className="rdr-input flex-1"
         />
-        {isAdmin && (
-          <Button
-            data-testid={`add-stock-${item.id}`}
-            onClick={handleAdd}
-            className="rdr-button"
-          >
-            +
-          </Button>
-        )}
+        <Button
+          data-testid={`add-stock-${item.id}`}
+          onClick={handleAdd}
+          className="rdr-button"
+        >
+          +
+        </Button>
         <Button
           data-testid={`remove-stock-${item.id}`}
           onClick={handleRemove}
