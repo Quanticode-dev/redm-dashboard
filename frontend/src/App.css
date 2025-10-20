@@ -144,14 +144,64 @@ h1, h2, h3 {
 }
 
 .rdr-card {
-  background: linear-gradient(135deg, #d4c5a9 0%, #f4e8d0 50%, #d4c5a9 100%);
+  background: 
+    /* Verschmutzungen und Alterungsflecken */
+    radial-gradient(ellipse at 25% 20%, rgba(139, 115, 85, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 80%, rgba(139, 115, 85, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(101, 84, 63, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 90% 30%, rgba(139, 115, 85, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 10% 70%, rgba(101, 84, 63, 0.06) 0%, transparent 50%),
+    /* Papier-Fasern */
+    repeating-linear-gradient(
+      45deg, 
+      transparent, 
+      transparent 3px, 
+      rgba(139, 115, 85, 0.02) 3px, 
+      rgba(139, 115, 85, 0.02) 4px
+    ),
+    repeating-linear-gradient(
+      -45deg, 
+      transparent, 
+      transparent 3px, 
+      rgba(101, 84, 63, 0.02) 3px, 
+      rgba(101, 84, 63, 0.02) 4px
+    ),
+    /* Leichte Falten */
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(139, 115, 85, 0.03) 20%,
+      transparent 40%,
+      rgba(101, 84, 63, 0.02) 60%,
+      transparent 80%,
+      rgba(139, 115, 85, 0.03) 100%
+    ),
+    /* Basis Pergament */
+    linear-gradient(135deg, #e8dcc4 0%, #f4e8d0 30%, #ecdfc7 50%, #f4e8d0 70%, #e8dcc4 100%);
   border: 3px solid #8b7355;
   border-radius: 4px;
   padding: 20px;
   box-shadow: 
     0 4px 8px rgba(0, 0, 0, 0.2),
     0 12px 24px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 60px rgba(139, 115, 85, 0.15),
+    inset 0 0 20px rgba(101, 84, 63, 0.1);
+  position: relative;
+}
+
+.rdr-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 15% 15%, rgba(139, 115, 85, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 85%, rgba(101, 84, 63, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+  border-radius: 2px;
 }
 
 .scroll-container {
