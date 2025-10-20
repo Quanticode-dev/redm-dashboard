@@ -518,14 +518,26 @@ export default function Hunter({ user }) {
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
             <div className="space-y-2 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
               {protocol.map((log) => (
-                <div key={log.id} className="p-3 rounded text-sm" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
-                  <p className="font-bold" style={{ color: '#3d2f1f' }}>{log.username}</p>
-                  <p style={{ color: '#6d5838' }}>
-                    {log.action === 'added' ? '✓' : '✗'} {log.quantity}x {log.item_name}
-                  </p>
-                  <p className="text-xs" style={{ color: '#8b7355' }}>
-                    {new Date(log.timestamp).toLocaleString('de-DE')}
-                  </p>
+                <div key={log.id} className="p-3 rounded text-sm flex justify-between items-start" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
+                  <div className="flex-1">
+                    <p className="font-bold" style={{ color: '#3d2f1f' }}>{log.username}</p>
+                    <p style={{ color: '#6d5838' }}>
+                      {log.action === 'added' ? '✓' : '✗'} {log.quantity}x {log.item_name}
+                    </p>
+                    <p className="text-xs" style={{ color: '#8b7355' }}>
+                      {new Date(log.timestamp).toLocaleString('de-DE')}
+                    </p>
+                  </div>
+                  {user.is_admin && (
+                    <button
+                      data-testid={`delete-log-${log.id}`}
+                      onClick={() => handleDeleteLog(log.id)}
+                      className="p-1 rounded hover:bg-[#8b7355] hover:bg-opacity-30 ml-2"
+                      title="Eintrag löschen"
+                    >
+                      <Trash2 size={14} style={{ color: '#8b4513' }} />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
