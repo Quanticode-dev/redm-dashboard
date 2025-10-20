@@ -341,7 +341,7 @@ export default function Hunter({ user }) {
         </div>
 
         {/* Middle Column - Inventory */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-4">
           <div className="rdr-card">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold" style={{ color: '#3d2f1f' }}>Bestandsliste</h3>
