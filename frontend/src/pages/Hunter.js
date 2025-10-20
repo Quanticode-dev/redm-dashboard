@@ -211,8 +211,8 @@ export default function Hunter({ user }) {
   };
 
   const handleStockChange = async (itemId, quantity, isPersonalUse = false) => {
-    if (!user.is_admin) {
-      toast.error("Nur Admins können den Bestand bearbeiten");
+    if (!user.is_admin && quantity > 0) {
+      toast.error("Nur Admins können Bestand hinzufügen");
       return;
     }
     try {
