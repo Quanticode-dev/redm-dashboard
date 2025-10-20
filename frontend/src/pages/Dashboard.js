@@ -82,7 +82,7 @@ export default function Dashboard({ user, setUser }) {
                     key={tile.id}
                     data-testid={`tile-${tile.id}`}
                     onClick={() => navigate(tile.path)}
-                    className="rdr-card p-8 hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    className="dashboard-tile p-8 hover:scale-105 transition-transform duration-300 cursor-pointer"
                   >
                     <h3 className="text-2xl font-bold text-center" style={{ color: '#3d2f1f' }}>{tile.name}</h3>
                   </button>
