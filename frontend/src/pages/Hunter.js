@@ -362,6 +362,11 @@ export default function Hunter({ user }) {
                 <p style={{ color: '#6d5838' }}>• {crafting.dosenwurst}x Dosenwurst</p>
               </div>
               <div className="p-3 rounded" style={{ background: 'rgba(139, 115, 85, 0.15)' }}>
+                <p style={{ color: '#3d2f1f', fontWeight: 600 }}>Crafting benötigt:</p>
+                <p style={{ color: '#6d5838' }}>• {crafting.materials.bratwurstCrafts}x Bratwurst craften</p>
+                <p style={{ color: '#6d5838' }}>• {crafting.materials.dosenwurstCrafts}x Dosenwurst craften</p>
+              </div>
+              <div className="p-3 rounded" style={{ background: 'rgba(139, 115, 85, 0.15)' }}>
                 <p style={{ color: '#3d2f1f', fontWeight: 600 }}>Materialien:</p>
                 <p style={{ color: '#6d5838' }}>• {crafting.materials.tierdarm}x Tierdarm</p>
                 <p style={{ color: '#6d5838' }}>• {crafting.materials.schweinefleisch}x Schweinefleisch</p>
