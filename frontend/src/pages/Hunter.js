@@ -420,8 +420,73 @@ export default function Hunter({ user }) {
           </div>
         </div>
 
-        {/* Right Column - Protocol */}
+        {/* Sales Calculator */}
         <div className="lg:col-span-3">
+          <div className="rdr-card">
+            <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Verkaufsrechner</h3>
+            
+            {saleItems.length === 0 ? (
+              <p className="text-sm text-center py-8" style={{ color: '#6d5838' }}>
+                Klicken Sie auf "Verkauf" bei einem Item, um es hinzuzufügen
+              </p>
+            ) : (
+              <>
+                <div className="space-y-3 mb-4 scroll-container" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                  {saleItems.map((item) => (
+                    <div key={item.id} className="p-3 rounded" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex-1">
+                          <h4 className="font-bold text-sm" style={{ color: '#3d2f1f' }}>{item.name}</h4>
+                          <p className="text-xs" style={{ color: '#6d5838' }}>${item.price} / Stück</p>
+                        </div>
+                        <button
+                          data-testid={`remove-sale-${item.id}`}
+                          onClick={() => removeSaleItem(item.id)}
+                          className="p-1 rounded hover:bg-[#8b7355] hover:bg-opacity-30"
+                        >
+                          <Trash2 size={14} style={{ color: '#8b4513' }} />
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Label className="text-xs" style={{ color: '#3d2f1f' }}>Menge:</Label>
+                        <Input
+                          data-testid={`sale-quantity-${item.id}`}
+                          type="number"
+                          min="1"
+                          max={item.stock}
+                          value={item.saleQuantity}
+                          onChange={(e) => updateSaleQuantity(item.id, e.target.value)}
+                          className="rdr-input flex-1"
+                        />
+                      </div>
+                      <p className="text-xs mt-2 text-right font-bold" style={{ color: '#3d2f1f' }}>
+                        Summe: ${(item.price * item.saleQuantity).toFixed(2)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="p-4 rounded mb-4" style={{ background: 'rgba(139, 115, 85, 0.3)' }}>
+                  <p className="text-sm" style={{ color: '#3d2f1f' }}>Gesamtsumme:</p>
+                  <p className="text-3xl font-bold" data-testid="sale-total" style={{ color: '#3d2f1f' }}>
+                    ${calculateSaleTotal()}
+                  </p>
+                </div>
+                
+                <Button
+                  data-testid="complete-sale-button"
+                  onClick={handleSell}
+                  className="rdr-button w-full"
+                >
+                  Verkaufen
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Right Column - Protocol */}
+        <div className="lg:col-span-2">
           <div className="rdr-card">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
             <div className="space-y-2 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
