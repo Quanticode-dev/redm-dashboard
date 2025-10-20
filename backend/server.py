@@ -294,7 +294,8 @@ async def update_stock(stock_data: StockUpdate, current_user: dict = Depends(get
         username=current_user["username"],
         item_name=item["name"],
         action=action,
-        quantity=abs(stock_data.quantity)
+        quantity=abs(stock_data.quantity),
+        is_personal_use=stock_data.is_personal_use
     )
     await db.protocol.insert_one(log.model_dump())
     
