@@ -70,6 +70,7 @@ export default function Hunter({ user }) {
   const [newItem, setNewItem] = useState({ name: "", price: 0, stock: 0 });
   const [editingItem, setEditingItem] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [saleItems, setSaleItems] = useState([]);
 
   useEffect(() => {
     loadInventory();
