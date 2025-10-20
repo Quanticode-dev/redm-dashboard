@@ -571,6 +571,35 @@ export default function Hunter({ user }) {
           </div>
         </div>
       </div>
+
+      {/* Custom Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialog.open} onOpenChange={(open) => !open && setDeleteDialog({ open: false, type: null, id: null, name: "" })}>
+        <AlertDialogContent className="rdr-card border-4 border-[#8b7355]">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl font-bold" style={{ color: '#3d2f1f', fontFamily: 'Crimson Text, serif' }}>
+              {deleteDialog.type === 'item' ? 'Item löschen?' : 'Protokoll-Eintrag löschen?'}
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base" style={{ color: '#6d5838' }}>
+              {deleteDialog.type === 'item' 
+                ? `Möchten Sie "${deleteDialog.name}" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.`
+                : `Möchten Sie den Protokoll-Eintrag für "${deleteDialog.name}" wirklich löschen?`
+              }
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-3">
+            <AlertDialogCancel className="rdr-button" style={{ background: 'linear-gradient(to bottom, #6d5838 0%, #5a4a3a 100%)' }}>
+              Abbrechen
+            </AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={confirmDelete}
+              className="rdr-button" 
+              style={{ background: 'linear-gradient(to bottom, #8b4513 0%, #6b3410 100%)' }}
+            >
+              Löschen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
