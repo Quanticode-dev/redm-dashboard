@@ -53,6 +53,64 @@ h1, h2, h3 {
     repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.03) 3px);
 }
 
+/* Pergament-Textur für Dashboard-Kacheln */
+.dashboard-tile {
+  background: 
+    /* Alterungsflecken */
+    radial-gradient(ellipse at 30% 25%, rgba(139, 115, 85, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 75%, rgba(101, 84, 63, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 10%, rgba(139, 115, 85, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 20% 80%, rgba(101, 84, 63, 0.1) 0%, transparent 45%),
+    /* Papier-Struktur */
+    repeating-linear-gradient(
+      0deg, 
+      transparent, 
+      transparent 2px, 
+      rgba(139, 115, 85, 0.04) 2px, 
+      rgba(139, 115, 85, 0.04) 3px
+    ),
+    repeating-linear-gradient(
+      90deg, 
+      transparent, 
+      transparent 2px, 
+      rgba(101, 84, 63, 0.03) 2px, 
+      rgba(101, 84, 63, 0.03) 3px
+    ),
+    /* Knitter-Effekt */
+    linear-gradient(
+      95deg,
+      transparent 0%,
+      rgba(139, 115, 85, 0.05) 25%,
+      transparent 50%,
+      rgba(101, 84, 63, 0.04) 75%,
+      transparent 100%
+    ),
+    /* Basis */
+    linear-gradient(140deg, #e8dcc4 0%, #f4e8d0 35%, #ecdfc7 50%, #f4e8d0 65%, #e8dcc4 100%);
+  border: 3px solid #8b7355;
+  border-radius: 4px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    inset 0 0 50px rgba(139, 115, 85, 0.2),
+    inset 0 0 20px rgba(101, 84, 63, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-tile::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 10% 20%, rgba(139, 115, 85, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(101, 84, 63, 0.07) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 .ornate-border {
   border: 3px solid #8b7355;
   border-radius: 4px;
