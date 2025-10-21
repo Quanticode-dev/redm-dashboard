@@ -226,7 +226,7 @@ export default function MapView({ user }) {
   };
 
   return (
-    <div style={{ width: '100%', height: '100%', overflow: 'hidden', background: '#2a2419', position: 'relative' }}>
+    <div style={{ width: '100%', height: '100%', overflow: 'hidden', background: '#2a2419', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
       {/* Instructions - außerhalb des scrollenden Containers */}
       <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '250px', zIndex: 1000 }}>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Steuerung</h3>
