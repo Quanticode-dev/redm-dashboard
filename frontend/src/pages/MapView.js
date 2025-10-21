@@ -33,6 +33,7 @@ export default function MapView({ user }) {
   
   const mapRef = useRef(null);
   const containerRef = useRef(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const getMarkerColor = (type) => {
     switch(type) {
