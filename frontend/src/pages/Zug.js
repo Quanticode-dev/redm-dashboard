@@ -225,7 +225,8 @@ export default function Zug({ user }) {
               </div>
             )}
           </div>
-        ))}
+        ))
+        )}
       </div>
     </div>
   );
