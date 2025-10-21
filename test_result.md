@@ -101,3 +101,120 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: |
+  Implement Zug (Train) section with 10 collapsible route tables that admins can edit and save permanently.
+  Each route has a title, stations, and 5 rows of editable cells. Also fix Map layout issue where content was cut off at the top.
+
+backend:
+  - task: "Zug Routes API - GET /api/zug/routes"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created API endpoint to retrieve all zug routes. Requires permission check for 'zug' or admin."
+
+  - task: "Zug Routes API - PUT /api/zug/routes/{route_id}"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created API endpoint to update zug route. Admin only access."
+
+  - task: "Zug Routes API - POST /api/zug/routes/init"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created API endpoint to initialize 10 empty routes. Admin only access."
+
+  - task: "Zug Route Model"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created ZugRoute and ZugRouteUpdate Pydantic models with title, stations, and rows fields."
+
+frontend:
+  - task: "Zug Page Component"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Zug.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created Zug component with 10 collapsible routes, edit mode, save/cancel buttons. RDR2 theme applied."
+
+  - task: "Dashboard - Integrate Zug Component"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Imported and added Zug component to Dashboard routes with permission check."
+
+  - task: "Map Layout Fix"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/MapView.js, /app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Fixed map layout issue by adjusting container positioning (absolute positioning with top/left/right/bottom: 0). Map now reaches navbar without cutoff."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  backend_tests:
+    - "Test GET /api/zug/routes with valid admin token"
+    - "Test GET /api/zug/routes with non-admin user having 'zug' permission"
+    - "Test GET /api/zug/routes with user without permission (should return 403)"
+    - "Test POST /api/zug/routes/init with admin token (should create 10 routes)"
+    - "Test POST /api/zug/routes/init again (should not duplicate routes)"
+    - "Test PUT /api/zug/routes/{id} with admin token (should update title, stations, rows)"
+    - "Test PUT /api/zug/routes/{id} with non-admin token (should return 403)"
+  
+  frontend_tests:
+    - "Navigate to Zug section from dashboard"
+    - "Verify 10 routes are displayed with proper RDR2 theme"
+    - "Click to expand/collapse routes"
+    - "Click 'Bearbeiten' button as admin to enter edit mode"
+    - "Edit route title, station names, and cell values"
+    - "Click 'Speichern' to save changes and verify persistence"
+    - "Click 'Abbrechen' to cancel changes without saving"
+    - "Verify non-admin users cannot see edit buttons"
+    - "Verify map layout is correct (no cutoff at top)"
