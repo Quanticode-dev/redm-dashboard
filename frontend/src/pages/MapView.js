@@ -97,22 +97,7 @@ export default function MapView({ user }) {
   };
 
   const handleWheel = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const delta = e.deltaY * -0.001;
-    const newScale = Math.min(Math.max(0.5, scale + delta), 3);
-    
-    // Zoom towards mouse position
-    const rect = containerRef.current.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    const scaleChange = newScale / scale;
-    const newX = mouseX - (mouseX - position.x) * scaleChange;
-    const newY = mouseY - (mouseY - position.y) * scaleChange;
-    
-    setScale(newScale);
-    setPosition({ x: newX, y: newY });
+    // This is now handled in useEffect with passive: false
   };
 
   const handleMouseDown = (e) => {
