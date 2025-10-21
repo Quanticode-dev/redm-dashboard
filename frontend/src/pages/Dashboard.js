@@ -4,6 +4,7 @@ import Hunter from "./Hunter";
 import Profile from "./Profile";
 import AdminPanel from "./AdminPanel";
 import MapView from "./MapView";
+import Zug from "./Zug";
 import { LogOut, User, Shield } from "lucide-react";
 import axios from "axios";
 
