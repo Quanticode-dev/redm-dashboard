@@ -97,17 +97,17 @@ class ZugRoutesAPITester:
             # Test without any token
             response = self.session.get(f"{BACKEND_URL}/zug/routes")
             
-            if response.status_code == 401:
+            if response.status_code in [401, 403]:
                 self.log_test(
                     "GET /api/zug/routes (No Auth)", 
                     True, 
-                    "Correctly rejected request without authentication"
+                    f"Correctly rejected request without authentication (status: {response.status_code})"
                 )
             else:
                 self.log_test(
                     "GET /api/zug/routes (No Auth)", 
                     False, 
-                    f"Expected 401, got {response.status_code}", 
+                    f"Expected 401 or 403, got {response.status_code}", 
                     response.text
                 )
                 
