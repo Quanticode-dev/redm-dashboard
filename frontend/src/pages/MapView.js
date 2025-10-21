@@ -58,6 +58,20 @@ export default function MapView({ user }) {
   useEffect(() => {
     loadMarkers();
     
+    // Zentriere die Map beim ersten Laden
+    if (containerRef.current && !isInitialized) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const mapWidth = 2048;
+      const mapHeight = 2048;
+      
+      // Berechne Position um Map zu zentrieren
+      const centerX = (rect.width - mapWidth * scale) / 2;
+      const centerY = (rect.height - mapHeight * scale) / 2;
+      
+      setPosition({ x: centerX, y: centerY });
+      setIsInitialized(true);
+    }
+    
     // Add wheel event listener with passive: false
     const container = containerRef.current;
     if (container) {
@@ -86,7 +100,7 @@ export default function MapView({ user }) {
         container.removeEventListener('wheel', wheelHandler);
       };
     }
-  }, [scale, position]);
+  }, [scale, position, isInitialized]);
 
   const loadMarkers = async () => {
     try {
