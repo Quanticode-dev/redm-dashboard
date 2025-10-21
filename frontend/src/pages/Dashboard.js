@@ -3,6 +3,7 @@ import { Button } from "../components/ui/button";
 import Hunter from "./Hunter";
 import Profile from "./Profile";
 import AdminPanel from "./AdminPanel";
+import MapView from "./MapView";
 import { LogOut, User, Shield } from "lucide-react";
 import axios from "axios";
 
