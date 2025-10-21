@@ -197,7 +197,7 @@ export default function MapView({ user }) {
   };
 
   return (
-    <div className="fixed inset-0 overflow-hidden" style={{ background: '#2a2419' }}>
+    <div style={{ height: 'calc(100vh - 80px)', width: '100%', overflow: 'hidden', background: '#2a2419' }}>
       <div
         ref={containerRef}
         className="w-full h-full cursor-move"
@@ -207,6 +207,7 @@ export default function MapView({ user }) {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onContextMenu={handleContextMenu}
+        style={{ touchAction: 'none' }}
       >
         <div
           ref={mapRef}
