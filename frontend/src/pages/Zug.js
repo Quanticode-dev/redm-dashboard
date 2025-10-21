@@ -26,6 +26,14 @@ export default function Zug({ user }) {
         await axios.post(`${API}/zug/routes/init`);
         const newRes = await axios.get(`${API}/zug/routes`);
         setRoutes(newRes.data);
+        
+        // Auto-expand first route after initialization
+        if (newRes.data.length > 0) {
+          setExpandedRoutes({ [newRes.data[0].id]: true });
+        }
+      } else if (res.data.length > 0) {
+        // Auto-expand first route on load
+        setExpandedRoutes({ [res.data[0].id]: true });
       }
     } catch (err) {
       console.error("Error loading routes:", err);
