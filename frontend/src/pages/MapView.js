@@ -245,7 +245,7 @@ export default function MapView({ user }) {
       <div
         ref={containerRef}
         className="cursor-move"
-        style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'hidden' }}
+        style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'hidden', position: 'relative' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -262,71 +262,75 @@ export default function MapView({ user }) {
             position: 'absolute',
             backgroundImage: 'url(https://customer-assets.emergentagent.com/job_hunterdash/artifacts/pcgsxul4_map_rdr2.png)',
             backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            pointerEvents: 'none'
           }}
-        >
-          {markers.map((marker) => {
-            // Berechne die Position im Viewport basierend auf scale und position
-            const screenX = marker.map_x * scale + position.x;
-            const screenY = marker.map_y * scale + position.y;
-            
-            return (
+        />
+        
+        {/* Markers - außerhalb des transformierten Containers */}
+        {markers.map((marker) => {
+          // Berechne die Position im Viewport basierend auf scale und position
+          const screenX = marker.map_x * scale + position.x;
+          const screenY = marker.map_y * scale + position.y;
+          
+          return (
+            <div
+              key={marker.id}
+              data-testid={`marker-${marker.id}`}
+              className="marker-pin"
+              style={{
+                position: 'absolute',
+                left: `${screenX}px`,
+                top: `${screenY}px`,
+                transform: 'translate(-50%, -50%)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease',
+                pointerEvents: 'all',
+                zIndex: 100
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
+              }}
+            >
+              {/* Pin */}
               <div
-                key={marker.id}
-                data-testid={`marker-${marker.id}`}
-                className="marker-pin"
+                style={{
+                  width: '16px',
+                  height: '16px',
+                  borderRadius: '50%',
+                  background: getMarkerColor(marker.type),
+                  border: '3px solid #000',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
+                }}
+              />
+              {/* Label */}
+              <div
                 style={{
                   position: 'absolute',
-                  left: `${screenX}px`,
-                  top: `${screenY}px`,
-                  transform: 'translate(-50%, -50%)',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s ease',
-                  pointerEvents: 'all'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.3)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
+                  top: '20px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  whiteSpace: 'nowrap',
+                  background: 'rgba(0, 0, 0, 0.85)',
+                  color: marker.is_friendly ? '#f4e8d0' : '#ef4444',
+                  padding: '3px 10px',
+                  borderRadius: '3px',
+                  fontSize: '13px',
+                  fontWeight: 'bold',
+                  border: '1px solid rgba(139, 115, 85, 0.5)',
+                  pointerEvents: 'none',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.3)'
                 }}
               >
-                {/* Pin */}
-                <div
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    borderRadius: '50%',
-                    background: getMarkerColor(marker.type),
-                    border: '3px solid #000',
-                    boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
-                  }}
-                />
-                {/* Label */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '20px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    whiteSpace: 'nowrap',
-                    background: 'rgba(0, 0, 0, 0.85)',
-                    color: marker.is_friendly ? '#f4e8d0' : '#ef4444',
-                    padding: '3px 10px',
-                    borderRadius: '3px',
-                    fontSize: '13px',
-                    fontWeight: 'bold',
-                    border: '1px solid rgba(139, 115, 85, 0.5)',
-                    pointerEvents: 'none',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.3)'
-                  }}
-                >
-                  {marker.name}
-                </div>
+                {marker.name}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
+      </div>
       </div>
 
       {/* Marker Form */}
