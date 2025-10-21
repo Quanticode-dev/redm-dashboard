@@ -115,7 +115,7 @@ export default function Zug({ user }) {
 
   return (
     <div style={{
-      minHeight: '100vh',
+      minHeight: 'calc(100vh - 92px)',
       padding: '24px',
       backgroundImage: 'url(https://customer-assets.emergentagent.com/job_huntersdashboard/artifacts/ye2xkd5e_back.jpg)',
       backgroundSize: 'cover',
