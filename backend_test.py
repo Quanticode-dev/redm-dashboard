@@ -114,6 +114,90 @@ class ZugRoutesAPITester:
         except Exception as e:
             self.log_test("GET /api/zug/routes (No Auth)", False, f"Request error: {str(e)}")
     
+    def test_create_zug_user_and_permissions(self):
+        """Test creating a user with zug permissions and verify access"""
+        try:
+            # Create a user with zug permission
+            user_data = {
+                "username": "zuguser",
+                "password": "zugpass123",
+                "is_admin": False,
+                "permissions": ["zug"]
+            }
+            
+            response = self.session.post(
+                f"{BACKEND_URL}/admin/users",
+                headers=self.get_auth_headers(),
+                json=user_data
+            )
+            
+            if response.status_code == 200:
+                self.log_test(
+                    "Create Zug User", 
+                    True, 
+                    "Successfully created user with zug permissions"
+                )
+                
+                # Now login as the zug user
+                login_response = self.session.post(
+                    f"{BACKEND_URL}/auth/login",
+                    json={
+                        "username": "zuguser",
+                        "password": "zugpass123"
+                    }
+                )
+                
+                if login_response.status_code == 200:
+                    zug_token = login_response.json()["access_token"]
+                    
+                    # Test GET routes with zug permission
+                    routes_response = self.session.get(
+                        f"{BACKEND_URL}/zug/routes",
+                        headers={"Authorization": f"Bearer {zug_token}"}
+                    )
+                    
+                    if routes_response.status_code == 200:
+                        self.log_test(
+                            "GET /api/zug/routes (Zug User)", 
+                            True, 
+                            "User with zug permission can access routes"
+                        )
+                    else:
+                        self.log_test(
+                            "GET /api/zug/routes (Zug User)", 
+                            False, 
+                            f"Zug user cannot access routes: {routes_response.status_code}"
+                        )
+                    
+                    # Test PUT routes with zug permission (should fail - admin only)
+                    routes = routes_response.json() if routes_response.status_code == 200 else []
+                    if routes:
+                        update_response = self.session.put(
+                            f"{BACKEND_URL}/zug/routes/{routes[0]['id']}",
+                            headers={"Authorization": f"Bearer {zug_token}"},
+                            json={"title": "Test Update by Zug User"}
+                        )
+                        
+                        if update_response.status_code == 403:
+                            self.log_test(
+                                "PUT /api/zug/routes (Zug User)", 
+                                True, 
+                                "Correctly rejected update by non-admin zug user"
+                            )
+                        else:
+                            self.log_test(
+                                "PUT /api/zug/routes (Zug User)", 
+                                False, 
+                                f"Expected 403, got {update_response.status_code}"
+                            )
+                else:
+                    self.log_test("Zug User Login", False, f"Failed to login as zug user: {login_response.status_code}")
+            else:
+                self.log_test("Create Zug User", False, f"Failed to create zug user: {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Create Zug User and Test Permissions", False, f"Error: {str(e)}")
+    
     def test_init_zug_routes_first_time(self):
         """Test POST /api/zug/routes/init (should create 10 routes, admin only)"""
         try:
