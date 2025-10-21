@@ -125,6 +125,20 @@ class MapMarkerUpdate(BaseModel):
     map_x: Optional[float] = None
     map_y: Optional[float] = None
 
+class ZugRoute(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    stations: List[str] = []
+    rows: List[List[str]] = []  # Each row is a list of cell values
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class ZugRouteUpdate(BaseModel):
+    title: Optional[str] = None
+    stations: Optional[List[str]] = None
+    rows: Optional[List[List[str]]] = None
+
 # --- Helper Functions ---
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
