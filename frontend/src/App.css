@@ -138,7 +138,6 @@ h1, h2, h3 {
 
 .leather-texture {
   background: linear-gradient(135deg, #3d2f1f 0%, #5a4a3a 50%, #3d2f1f 100%);
-  position: relative;
 }
 
 .leather-texture::after {
