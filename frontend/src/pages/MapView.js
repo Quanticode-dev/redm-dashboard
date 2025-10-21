@@ -359,7 +359,7 @@ export default function MapView({ user }) {
                   <SelectTrigger className="rdr-input">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="rdr-card">
+                  <SelectContent className="rdr-card" style={{ zIndex: 10001 }}>
                     <SelectItem value="person">Person</SelectItem>
                     <SelectItem value="gebaeude">Gebäude</SelectItem>
                     <SelectItem value="ankauf">Ankauf</SelectItem>
