@@ -226,17 +226,16 @@ export default function MapView({ user }) {
   };
 
   return (
-    <div style={{ height: 'calc(100vh - 80px)', width: '100%', overflow: 'hidden', background: '#2a2419' }}>
+    <div style={{ width: '100%', overflow: 'hidden', background: '#2a2419' }}>
       <div
         ref={containerRef}
-        className="w-full h-full cursor-move"
-        onWheel={handleWheel}
+        className="cursor-move"
+        style={{ width: '100%', height: 'calc(100vh - 90px)', touchAction: 'none' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onContextMenu={handleContextMenu}
-        style={{ touchAction: 'none' }}
       >
         <div
           ref={mapRef}
