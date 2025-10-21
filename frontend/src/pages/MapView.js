@@ -241,7 +241,7 @@ export default function MapView({ user }) {
                   width: '12px',
                   height: '12px',
                   borderRadius: '50%',
-                  background: marker.is_friendly ? '#4ade80' : '#ef4444',
+                  background: getMarkerColor(marker.type),
                   border: '2px solid #000',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.5)'
                 }}
@@ -264,7 +264,7 @@ export default function MapView({ user }) {
                   pointerEvents: 'none'
                 }}
               >
-                {marker.name} ({marker.type})
+                {marker.name}
               </div>
             </div>
           ))}
