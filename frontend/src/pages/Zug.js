@@ -99,27 +99,32 @@ export default function Zug({ user }) {
       </h2>
 
       <div className="space-y-4">
-        {routes.map((route) => (
-          <div key={route.id} className="rdr-parchment-tile">
-            {/* Header */}
-            <div
-              className="flex items-center justify-between p-4 cursor-pointer"
-              onClick={() => !isEditing(route.id) && toggleRoute(route.id)}
-            >
-              <div className="flex-1">
-                {isEditing(route.id) ? (
-                  <Input
-                    value={editedData.title}
-                    onChange={(e) => updateTitle(e.target.value)}
-                    className="rdr-input font-bold"
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                ) : (
-                  <h3 className="font-bold text-lg" style={{ color: '#3d2f1f' }}>
-                    {route.title}
-                  </h3>
-                )}
-              </div>
+        {routes.length === 0 ? (
+          <div className="text-center text-white p-8">
+            Keine Routen verfügbar. Bitte initialisieren Sie die Routen.
+          </div>
+        ) : (
+          routes.map((route) => (
+            <div key={route.id} className="rdr-parchment-tile">
+              {/* Header */}
+              <div
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-opacity-80"
+                onClick={() => !isEditing(route.id) && toggleRoute(route.id)}
+              >
+                <div className="flex-1">
+                  {isEditing(route.id) ? (
+                    <Input
+                      value={editedData.title}
+                      onChange={(e) => updateTitle(e.target.value)}
+                      className="rdr-input font-bold"
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  ) : (
+                    <h3 className="font-bold text-lg" style={{ color: '#3d2f1f' }}>
+                      {route.title}
+                    </h3>
+                  )}
+                </div>
               
               <div className="flex items-center gap-2">
                 {user.is_admin && (
