@@ -69,6 +69,7 @@ export default function MapView({ user }) {
 
   const handleWheel = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const delta = e.deltaY * -0.001;
     const newScale = Math.min(Math.max(0.5, scale + delta), 3);
     
