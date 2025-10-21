@@ -68,6 +68,48 @@ export default function Zug({ user }) {
       time: "[40min]",
       stations: ["n BW", null, "MZ", null, "MAC", null, "G2", null, "AD", null, "BP", null, "AD", null, "MAC", null, "BW"],
       data: ["20", "L", "", "30 Tu", "", "R ➸ L", "L", "", "", "25 R", "", "R 25", "", "", "", "R ➸ R", "20"]
+    },
+    {
+      id: 6,
+      title: "/g6 - !TEST! Ost Runde [SD-VH-AB-BCC-WLL-RGG-G1-MZ-MAC-BW-G1-FLT-RHO-SD]",
+      time: "[XXmin]",
+      stations: ["no SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "MZ", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
+      data: ["", "R", "", "", "20 R", "40", "L 10", "40", "", "L ❘ R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "L ❘ R"]
+    },
+    {
+      id: 7,
+      title: "/g7 - !TEST! Östliche Zentralrunde [SD-OIL-VAL-FLT-G1-MZ-MAC-BW-G1-FLT-RHO-SD]",
+      time: "[XXmin]",
+      stations: ["no SD", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "MZ", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
+      data: ["", "L ➸ R", "", "", "", "R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "L ❘ R"]
+    },
+    {
+      id: 8,
+      title: "/g8 - Kleine BW Ost Runde [BW-G1-FLT-RHO-SD-OIL-VAL-FLT-G1-BW]",
+      time: "[XXmin]",
+      stations: ["n BW", null, "G1", null, "FLT", null, "RHO", null, "SD", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "BW"],
+      data: ["20", "", "R ➸ R", "", "R", "", "", "", "L ❘ R", "L ➸ R", "", "", "", "R", "", "", "L ➸ L", "", "20"]
+    },
+    {
+      id: 9,
+      title: "/g9 - !TEST! Große Black Water Ost Runde [BW-G1-FLT-RHO-SD-VH-AB-BCC-WLL-RGG-G1-BW]",
+      time: "[XXmin]",
+      stations: ["n BW", null, "G1", null, "FLT", null, "RHO", null, "SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "BW"],
+      data: ["20", "", "R>R", "", "R", "", "", "", "L|R", "R", "", "", "20R", "40", "L 10", "40", "", "L|R", "", "", "R>L", "", "20"]
+    },
+    {
+      id: 10,
+      title: "Benutzer - Black Water ➸ Saint Denise [BW-G1-FLT-RHO-SD]",
+      time: "[15min]",
+      stations: ["n BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
+      data: ["20", "", "R ➸ R", "", "R", "", "", "", "R ❘ L"]
+    },
+    {
+      id: 11,
+      title: "Benutzer - Saint Denise ➸ Black Water [SD-OIL-VAL-FLT-G1-BW]",
+      time: "[20min]",
+      stations: ["no SD", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "BW"],
+      data: ["", "L ➸ R", "", "", "", "R", "", "", "L ➸ L", "", "20"]
     }
   ];
 
