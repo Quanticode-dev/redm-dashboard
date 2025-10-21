@@ -403,6 +403,49 @@ async def delete_marker(marker_id: str, current_user: dict = Depends(get_current
         raise HTTPException(status_code=404, detail="Marker not found")
     return {"message": "Marker deleted successfully"}
 
+# --- Zug Routes ---
+@api_router.get("/zug/routes", response_model=List[ZugRoute])
+async def get_zug_routes(current_user: dict = Depends(get_current_user)):
+    if "zug" not in current_user.get("permissions", []) and not current_user.get("is_admin"):
+        raise HTTPException(status_code=403, detail="No permission for Zug section")
+    
+    routes = await db.zug_routes.find({}, {"_id": 0}).to_list(length=None)
+    return [ZugRoute(**route) for route in routes]
+
+@api_router.put("/zug/routes/{route_id}", response_model=ZugRoute)
+async def update_zug_route(route_id: str, route_data: ZugRouteUpdate, admin_user: dict = Depends(get_admin_user)):
+    route = await db.zug_routes.find_one({"id": route_id}, {"_id": 0})
+    if not route:
+        raise HTTPException(status_code=404, detail="Route not found")
+    
+    update_data = route_data.model_dump(exclude_unset=True)
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    await db.zug_routes.update_one({"id": route_id}, {"$set": update_data})
+    
+    updated_route = await db.zug_routes.find_one({"id": route_id}, {"_id": 0})
+    return ZugRoute(**updated_route)
+
+@api_router.post("/zug/routes/init")
+async def initialize_zug_routes(admin_user: dict = Depends(get_admin_user)):
+    # Check if routes already exist
+    count = await db.zug_routes.count_documents({})
+    if count > 0:
+        return {"message": "Routes already initialized"}
+    
+    # Create 10 empty routes
+    routes = []
+    for i in range(1, 11):
+        route = ZugRoute(
+            title=f"/g{i} - Route {i} [Stations] - [Zeit]",
+            stations=["SD", "EM", "OIL", "VAL", "RHO", "BAC", "WAL", "WHL", "NAC"],
+            rows=[["" for _ in range(9)] for _ in range(5)]  # 5 rows, 9 stations
+        )
+        routes.append(route.model_dump())
+    
+    await db.zug_routes.insert_many(routes)
+    return {"message": "Routes initialized successfully", "count": len(routes)}
+
 # Include router
 app.include_router(api_router)
 
