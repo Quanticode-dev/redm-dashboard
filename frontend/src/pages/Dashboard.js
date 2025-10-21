@@ -32,7 +32,7 @@ export default function Dashboard({ user, setUser }) {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #2a2419 0%, #3d2f1f 50%, #2a2419 100%)' }}>
       {/* Header - Fixed */}
-      <header className="leather-texture border-b-4 border-[#8b7355] p-4 fixed top-0 left-0 right-0 z-50">
+      <header className="fixed top-0 left-0 right-0 z-50 leather-texture border-b-4 border-[#8b7355] p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold" style={{ color: '#f4e8d0', fontFamily: 'Pirata One, cursive' }}>Hunter Dashboard</h1>
