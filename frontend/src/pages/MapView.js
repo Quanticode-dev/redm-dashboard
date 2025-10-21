@@ -176,30 +176,33 @@ export default function MapView({ user }) {
   };
 
   return (
-    <div className="h-screen w-full overflow-hidden relative" style={{ background: '#2a2419' }}>
-      <div
-        ref={containerRef}
-        className="w-full h-full cursor-move"
-        onWheel={handleWheel}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onContextMenu={handleContextMenu}
-      >
+    <div className="max-w-screen-xl mx-auto p-8">
+      <h2 className="text-3xl font-bold mb-6" style={{ color: '#f4e8d0' }}>Map Bereich</h2>
+      
+      <div className="relative" style={{ height: 'calc(100vh - 250px)' }}>
         <div
-          ref={mapRef}
-          style={{
-            transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-            transformOrigin: '0 0',
-            width: '2048px',
-            height: '2048px',
-            position: 'absolute',
-            backgroundImage: 'url(https://customer-assets.emergentagent.com/job_hunterdash/artifacts/pcgsxul4_map_rdr2.png)',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat'
-          }}
+          ref={containerRef}
+          className="w-full h-full cursor-move rdr-card overflow-hidden"
+          onWheel={handleWheel}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onContextMenu={handleContextMenu}
         >
+          <div
+            ref={mapRef}
+            style={{
+              transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+              transformOrigin: '0 0',
+              width: '2048px',
+              height: '2048px',
+              position: 'absolute',
+              backgroundImage: 'url(https://customer-assets.emergentagent.com/job_hunterdash/artifacts/pcgsxul4_map_rdr2.png)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
           {markers.map((marker) => (
             <div
               key={marker.id}
