@@ -349,7 +349,8 @@ export default function MapView({ user }) {
                   <SelectContent className="rdr-card">
                     <SelectItem value="person">Person</SelectItem>
                     <SelectItem value="gebaeude">Gebäude</SelectItem>
-                    <SelectItem value="material">Material</SelectItem>
+                    <SelectItem value="ankauf">Ankauf</SelectItem>
+                    <SelectItem value="abbau">Abbau</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
