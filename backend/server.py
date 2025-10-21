@@ -341,6 +341,54 @@ async def delete_protocol_log(log_id: str, admin_user: dict = Depends(get_admin_
         raise HTTPException(status_code=404, detail="Log entry not found")
     return {"message": "Log entry deleted successfully"}
 
+# --- Map Marker Routes ---
+@api_router.get("/map/markers", response_model=List[MapMarker])
+async def get_markers(current_user: dict = Depends(get_current_user)):
+    if "map" not in current_user.get("permissions", []):
+        raise HTTPException(status_code=403, detail="No permission for Map section")
+    markers = await db.map_markers.find({}, {"_id": 0}).to_list(1000)
+    return markers
+
+@api_router.post("/map/markers", response_model=MapMarker)
+async def create_marker(marker_data: MapMarkerCreate, current_user: dict = Depends(get_current_user)):
+    if "map" not in current_user.get("permissions", []):
+        raise HTTPException(status_code=403, detail="No permission for Map section")
+    
+    marker_obj = MapMarker(
+        **marker_data.model_dump(),
+        created_by=current_user["username"]
+    )
+    
+    doc = marker_obj.model_dump()
+    await db.map_markers.insert_one(doc)
+    return marker_obj
+
+@api_router.put("/map/markers/{marker_id}", response_model=MapMarker)
+async def update_marker(marker_id: str, marker_data: MapMarkerUpdate, current_user: dict = Depends(get_current_user)):
+    if "map" not in current_user.get("permissions", []):
+        raise HTTPException(status_code=403, detail="No permission for Map section")
+    
+    marker = await db.map_markers.find_one({"id": marker_id}, {"_id": 0})
+    if not marker:
+        raise HTTPException(status_code=404, detail="Marker not found")
+    
+    update_data = {k: v for k, v in marker_data.model_dump().items() if v is not None}
+    if update_data:
+        await db.map_markers.update_one({"id": marker_id}, {"$set": update_data})
+    
+    updated_marker = await db.map_markers.find_one({"id": marker_id}, {"_id": 0})
+    return MapMarker(**updated_marker)
+
+@api_router.delete("/map/markers/{marker_id}")
+async def delete_marker(marker_id: str, current_user: dict = Depends(get_current_user)):
+    if "map" not in current_user.get("permissions", []):
+        raise HTTPException(status_code=403, detail="No permission for Map section")
+    
+    result = await db.map_markers.delete_one({"id": marker_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Marker not found")
+    return {"message": "Marker deleted successfully"}
+
 # Include router
 app.include_router(api_router)
 
