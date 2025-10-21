@@ -404,7 +404,7 @@ export default function MapView({ user }) {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
