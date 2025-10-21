@@ -331,7 +331,6 @@ export default function MapView({ user }) {
           );
         })}
       </div>
-      </div>
 
       {/* Marker Form */}
       {showMarkerForm && (
