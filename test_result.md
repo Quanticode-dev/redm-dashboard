@@ -109,51 +109,63 @@ user_problem_statement: |
 backend:
   - task: "Zug Routes API - GET /api/zug/routes"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created API endpoint to retrieve all zug routes. Requires permission check for 'zug' or admin."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: API works correctly. Admin can access (retrieved 20 routes), users with 'zug' permission can access, unauthorized requests properly rejected with 403. Permission system working as expected."
 
   - task: "Zug Routes API - PUT /api/zug/routes/{route_id}"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created API endpoint to update zug route. Admin only access."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: API works correctly. Admin can update routes (title, stations, rows), changes persist to database, non-admin users properly rejected with 403. Update functionality verified with sample data."
 
   - task: "Zug Routes API - POST /api/zug/routes/init"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created API endpoint to initialize 10 empty routes. Admin only access."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: API works correctly. Routes initialization working (returns 'already initialized' when routes exist), admin-only access enforced. Duplicate prevention working as expected."
 
   - task: "Zug Route Model"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created ZugRoute and ZugRouteUpdate Pydantic models with title, stations, and rows fields."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Models working correctly. ZugRoute and ZugRouteUpdate models properly handle title, stations array, and rows (2D array). Data serialization/deserialization working correctly with MongoDB."
 
 frontend:
   - task: "Zug Page Component"
