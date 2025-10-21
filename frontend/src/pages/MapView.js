@@ -315,17 +315,18 @@ export default function MapView({ user }) {
 
       {/* Marker Form */}
       {showMarkerForm && (
-        <>
+        <div className="fixed inset-0" style={{ zIndex: 9999 }}>
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="absolute inset-0 bg-black bg-opacity-50"
             onClick={() => setShowMarkerForm(false)}
           />
           <div
-            className="fixed z-50 rdr-card p-4"
+            className="absolute rdr-card p-4"
             style={{
               left: `${Math.min(markerFormPosition.x, window.innerWidth - 300)}px`,
-              top: `${Math.min(markerFormPosition.y, window.innerHeight - 400)}px`,
-              width: '280px'
+              top: `${Math.min(markerFormPosition.y, window.innerHeight - 450)}px`,
+              width: '280px',
+              zIndex: 10000
             }}
           >
             <div className="flex justify-between items-center mb-4">
