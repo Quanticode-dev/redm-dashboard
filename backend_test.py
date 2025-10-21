@@ -419,6 +419,9 @@ class ZugRoutesAPITester:
         # 3. Test GET routes without permission
         self.test_get_zug_routes_without_permission()
         
+        # 3.5. Test creating zug user and permissions
+        self.test_create_zug_user_and_permissions()
+        
         # 4. Test init routes (first time)
         self.test_init_zug_routes_first_time()
         
