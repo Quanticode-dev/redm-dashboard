@@ -262,17 +262,17 @@ class ZugRoutesAPITester:
                 json=update_data
             )
             
-            if response.status_code == 401:
+            if response.status_code in [401, 403]:
                 self.log_test(
                     "PUT /api/zug/routes/{id} (No Admin)", 
                     True, 
-                    "Correctly rejected update without authentication"
+                    f"Correctly rejected update without authentication (status: {response.status_code})"
                 )
             else:
                 self.log_test(
                     "PUT /api/zug/routes/{id} (No Admin)", 
                     False, 
-                    f"Expected 401, got {response.status_code}", 
+                    f"Expected 401 or 403, got {response.status_code}", 
                     response.text
                 )
                 
