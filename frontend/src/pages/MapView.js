@@ -212,6 +212,36 @@ export default function MapView({ user }) {
 
   return (
     <div style={{ width: '100%', height: '100%', overflow: 'hidden', background: '#2a2419', position: 'relative' }}>
+      {/* Instructions - außerhalb des scrollenden Containers */}
+      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '250px', zIndex: 1000 }}>
+        <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Steuerung</h3>
+        <ul className="text-xs space-y-1 mb-3" style={{ color: '#6d5838' }}>
+          <li>• <strong>Rechtsklick:</strong> Marker hinzufügen/bearbeiten</li>
+          <li>• <strong>Linksklick + Ziehen:</strong> Karte bewegen</li>
+          <li>• <strong>Mausrad:</strong> Zoom</li>
+          <li>• <strong>Zoom:</strong> {Math.round(scale * 100)}%</li>
+        </ul>
+        <h3 className="font-bold mb-2 mt-3" style={{ color: '#3d2f1f' }}>Legende</h3>
+        <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
+          <div className="flex items-center gap-2">
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #000' }} />
+            <span>Person</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #000' }} />
+            <span>Gebäude</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #000' }} />
+            <span>Ankauf</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #000' }} />
+            <span>Abbau</span>
+          </div>
+        </div>
+      </div>
+      
       <div
         ref={containerRef}
         className="cursor-move"
