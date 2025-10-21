@@ -1,46 +1,28 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { API } from "../App";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { toast } from "sonner";
-import { ChevronDown, ChevronUp, Save } from "lucide-react";
 
 export default function Zug({ user }) {
-  const [routes, setRoutes] = useState([]);
   const [expandedRoutes, setExpandedRoutes] = useState({});
-  const [editingRoute, setEditingRoute] = useState(null);
-  const [editedData, setEditedData] = useState(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
+  // Clock update
   useEffect(() => {
-    loadRoutes();
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
-  const loadRoutes = async () => {
-    try {
-      const res = await axios.get(`${API}/zug/routes`);
-      setRoutes(res.data);
-      
-      // If no routes exist and user is admin, initialize them
-      if (res.data.length === 0 && user.is_admin) {
-        await axios.post(`${API}/zug/routes/init`);
-        const newRes = await axios.get(`${API}/zug/routes`);
-        setRoutes(newRes.data);
-        
-        // Auto-expand first route after initialization
-        if (newRes.data.length > 0) {
-          setExpandedRoutes({ [newRes.data[0].id]: true });
-        }
-      } else if (res.data.length > 0) {
-        // Auto-expand first route on load
-        setExpandedRoutes({ [res.data[0].id]: true });
-      }
-    } catch (err) {
-      console.error("Error loading routes:", err);
-      if (err.response?.status === 403) {
-        toast.error("Keine Berechtigung für Zug-Bereich");
-      }
-    }
+  const formatTime = (date) => {
+    return new Intl.DateTimeFormat('de-DE', {
+      weekday: 'long',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).format(date);
   };
 
   const toggleRoute = (routeId) => {
@@ -50,191 +32,181 @@ export default function Zug({ user }) {
     }));
   };
 
-  const startEditing = (route) => {
-    setEditingRoute(route.id);
-    setEditedData({
-      title: route.title,
-      stations: [...route.stations],
-      rows: route.rows.map(row => [...row])
-    });
-  };
-
-  const cancelEditing = () => {
-    setEditingRoute(null);
-    setEditedData(null);
-  };
-
-  const updateCell = (rowIndex, colIndex, value) => {
-    setEditedData(prev => {
-      const newRows = [...prev.rows];
-      newRows[rowIndex] = [...newRows[rowIndex]];
-      newRows[rowIndex][colIndex] = value;
-      return { ...prev, rows: newRows };
-    });
-  };
-
-  const updateTitle = (value) => {
-    setEditedData(prev => ({ ...prev, title: value }));
-  };
-
-  const updateStation = (index, value) => {
-    setEditedData(prev => {
-      const newStations = [...prev.stations];
-      newStations[index] = value;
-      return { ...prev, stations: newStations };
-    });
-  };
-
-  const saveRoute = async (routeId) => {
-    try {
-      await axios.put(`${API}/zug/routes/${routeId}`, editedData);
-      toast.success("Route gespeichert");
-      setEditingRoute(null);
-      setEditedData(null);
-      loadRoutes();
-    } catch (err) {
-      console.error("Error saving route:", err);
-      toast.error("Fehler beim Speichern");
+  // Hardcoded routes data
+  const routes = [
+    {
+      id: 1,
+      title: "/g1 - Kleine Runde [SD➸EM➸OIL➸VAL➸RHO➸SD]",
+      time: "[20min]",
+      stations: ["sw SD", null, "EM", null, "OIL", null, "VAL", null, "RHO", null, "SD"],
+      data: ["R", "", "L", "R", "", "", "", "L", "", "", "R ❘ L"]
+    },
+    {
+      id: 2,
+      title: "/g2 - Große Runde [SD➸VH➸AB➸BCC➸WLL➸RGG➸G1➸FLT➸RHO➸SD]",
+      time: "[40min]",
+      stations: ["no SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "FLT", null, "RHO", null, "SD"],
+      data: ["", "R", "", "", "20 R", "40", "L 10", "40", "", "L ❘ R", "", "L", "", "", "R", "", "", "", "R ❘ L"]
+    },
+    {
+      id: 3,
+      title: "/g3 - Mega Runde [SD-VH-AB-BCC-WLL-RGG-G1-MZ-MAC-G2-AD-BP-AD-MAC-BW-G1-FLT-RHO-SD]",
+      time: "[XXmin]",
+      stations: ["no SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "MZ", null, "MAC", null, "G2", null, "AD", null, "BP", null, "AD", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
+      data: ["", "R", "", "", "20 R", "40", "L 10", "40", "", "L ❘ R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ L", "L", "", "", "25 R", "", "R 25", "", "", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "R ❘ L"]
+    },
+    {
+      id: 4,
+      title: "/g4 - Zentral Runde [SD-EM-OIL-VAL-FLT-G1-MZ-MAC-BW-G1-FLT-RHO-SD]",
+      time: "[XXmin]",
+      stations: ["sw SD", null, "EM", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "MZ", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
+      data: ["R", "", "L", "", "R", "", "", "R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "R ❘ L"]
+    },
+    {
+      id: 5,
+      title: "/g5 - West Runde [BW-MZ-MAC-G2-AD-BP-AD-MAC-BW]",
+      time: "[40min]",
+      stations: ["n BW", null, "MZ", null, "MAC", null, "G2", null, "AD", null, "BP", null, "AD", null, "MAC", null, "BW"],
+      data: ["20", "L", "", "30 Tu", "", "R ➸ L", "L", "", "", "25 R", "", "R 25", "", "", "", "R ➸ R", "20"]
     }
-  };
-
-  const isEditing = (routeId) => editingRoute === routeId;
+  ];
 
   return (
-    <div className="max-w-7xl mx-auto p-8">
-      <h2 className="text-3xl font-bold mb-8" style={{ color: '#f4e8d0' }}>
-        Zug - Routen
-      </h2>
+    <div style={{
+      minHeight: '100vh',
+      padding: '24px',
+      backgroundImage: 'url(https://customer-assets.emergentagent.com/job_huntersdashboard/artifacts/ye2xkd5e_back.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed'
+    }}>
+      {/* Header with Clock */}
+      <h1 style={{
+        fontFamily: 'Pirata One, cursive',
+        fontSize: '3rem',
+        fontWeight: '700',
+        color: '#000',
+        marginBottom: '24px',
+        textShadow: '2px 2px 2px rgba(0,0,0,0.3)'
+      }}>
+        Whitmore Railroads - Routen&nbsp;
+        <span style={{
+          fontFamily: 'Comic Sans MS, cursive, sans-serif',
+          fontSize: '2rem'
+        }}>
+          {formatTime(currentTime)}
+        </span>
+      </h1>
 
-      <div className="space-y-4">
-        {routes.length === 0 ? (
-          <div className="text-center text-white p-8">
-            Keine Routen verfügbar. Bitte initialisieren Sie die Routen.
-          </div>
-        ) : (
-          routes.map((route) => (
-            <div key={route.id} className="rdr-parchment-tile">
-              {/* Header */}
-              <div
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-opacity-80"
-                onClick={() => !isEditing(route.id) && toggleRoute(route.id)}
-              >
-                <div className="flex-1">
-                  {isEditing(route.id) ? (
-                    <Input
-                      value={editedData.title}
-                      onChange={(e) => updateTitle(e.target.value)}
-                      className="rdr-input font-bold"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  ) : (
-                    <h3 className="font-bold text-lg" style={{ color: '#3d2f1f' }}>
-                      {route.title}
-                    </h3>
-                  )}
-                </div>
-              
-              <div className="flex items-center gap-2">
-                {user.is_admin && (
-                  <>
-                    {isEditing(route.id) ? (
-                      <>
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            saveRoute(route.id);
-                          }}
-                          className="rdr-button flex items-center gap-2"
-                        >
-                          <Save size={16} />
-                          Speichern
-                        </Button>
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            cancelEditing();
-                          }}
-                          className="rdr-button"
-                          style={{ background: 'linear-gradient(to bottom, #8b4513 0%, #6b3410 100%)' }}
-                        >
-                          Abbrechen
-                        </Button>
-                      </>
-                    ) : (
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          startEditing(route);
-                        }}
-                        className="rdr-button"
-                      >
-                        Bearbeiten
-                      </Button>
-                    )}
-                  </>
-                )}
-                <button className="text-[#3d2f1f]">
-                  {expandedRoutes[route.id] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                </button>
-              </div>
-            </div>
+      {/* Routes Tables */}
+      <div style={{ display: 'grid', gap: '24px' }}>
+        {routes.map((route) => (
+          <table key={route.id} style={{
+            width: '100%',
+            borderCollapse: 'separate',
+            borderSpacing: '1px',
+            tableLayout: 'fixed',
+            background: 'transparent'
+          }}>
+            <tbody>
+              {/* Control Row */}
+              <tr style={{ background: 'transparent' }}>
+                <td colSpan="25" style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#000',
+                  fontSize: '23px',
+                  textShadow: '1px 1px 1px #b78f60'
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.6rem',
+                    padding: '10px 12px'
+                  }}>
+                    <button
+                      onClick={() => toggleRoute(route.id)}
+                      style={{
+                        appearance: 'none',
+                        border: '1px solid #fff',
+                        background: '#c7a86a',
+                        borderRadius: '6px',
+                        padding: '4px 10px',
+                        fontSize: '16px',
+                        lineHeight: '1',
+                        cursor: 'pointer',
+                        minWidth: '30px'
+                      }}
+                    >
+                      {expandedRoutes[route.id] ? '−' : '+'}
+                    </button>
+                    <b>{route.title} - <font color="brown">{route.time}</font></b>
+                  </div>
+                </td>
+              </tr>
 
-            {/* Table */}
-            {expandedRoutes[route.id] && (
-              <div className="px-4 pb-4 overflow-x-auto">
-                <table className="w-full border-collapse" style={{ minWidth: '800px' }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(139, 115, 85, 0.2)' }}>
-                      <th className="border-2 border-[#8b7355] p-2 text-left" style={{ color: '#3d2f1f', width: '60px' }}>
-                        #
-                      </th>
-                      {(isEditing(route.id) ? editedData.stations : route.stations).map((station, idx) => (
-                        <th key={idx} className="border-2 border-[#8b7355] p-2 text-center" style={{ color: '#3d2f1f' }}>
-                          {isEditing(route.id) ? (
-                            <Input
-                              value={station}
-                              onChange={(e) => updateStation(idx, e.target.value)}
-                              className="rdr-input text-center font-bold"
-                              style={{ minWidth: '60px' }}
-                            />
-                          ) : (
-                            <span className="font-bold">{station}</span>
-                          )}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(isEditing(route.id) ? editedData.rows : route.rows).map((row, rowIdx) => (
-                      <tr key={rowIdx}>
-                        <td className="border-2 border-[#8b7355] p-2 text-center font-bold" style={{ color: '#6d5838' }}>
-                          {rowIdx + 1}
-                        </td>
-                        {row.map((cell, colIdx) => (
-                          <td key={colIdx} className="border-2 border-[#8b7355] p-1">
-                            {isEditing(route.id) ? (
-                              <Input
-                                value={cell}
-                                onChange={(e) => updateCell(rowIdx, colIdx, e.target.value)}
-                                className="rdr-input text-center"
-                                style={{ minWidth: '60px', padding: '4px' }}
-                              />
-                            ) : (
-                              <div className="text-center" style={{ color: '#8b4513', fontWeight: '600', minHeight: '24px' }}>
-                                {cell}
-                              </div>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
+              {/* Stations Row */}
+              {expandedRoutes[route.id] && (
+                <>
+                  <tr>
+                    {route.stations.map((station, idx) => (
+                      <td key={idx} style={{
+                        border: '1px solid #aa6b1d',
+                        padding: '0',
+                        textAlign: 'center',
+                        height: '40px',
+                        verticalAlign: 'middle',
+                        fontSize: 'clamp(12.5px, 1.375vw, 17.5px)',
+                        whiteSpace: 'nowrap',
+                        borderRadius: '4px',
+                        background: '#c7a86a',
+                        overflow: 'hidden',
+                        fontWeight: 'bold'
+                      }}>
+                        {station === null ? (
+                          <img 
+                            src="https://customer-assets.emergentagent.com/job_huntersdashboard/artifacts/q9td7fj2_gleis.png" 
+                            alt="Gleis"
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'contain',
+                              display: 'block'
+                            }}
+                          />
+                        ) : (
+                          station
+                        )}
+                      </td>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        ))
-        )}
+                  </tr>
+
+                  {/* Data Row */}
+                  <tr>
+                    {route.data.map((cell, idx) => (
+                      <td key={idx} style={{
+                        border: '1px solid #aa6b1d',
+                        padding: '0',
+                        textAlign: 'center',
+                        height: '40px',
+                        verticalAlign: 'middle',
+                        fontSize: 'clamp(12.5px, 1.375vw, 17.5px)',
+                        whiteSpace: 'nowrap',
+                        borderRadius: '4px',
+                        background: '#c7a86a',
+                        overflow: 'hidden',
+                        color: 'brown',
+                        fontWeight: 'bold'
+                      }}>
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                </>
+              )}
+            </tbody>
+          </table>
+        ))}
       </div>
     </div>
   );
