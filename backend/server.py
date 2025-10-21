@@ -104,7 +104,7 @@ class MapMarker(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
-    type: str  # "person", "gebaeude", "material"
+    type: str  # "person", "gebaeude", "ankauf", "abbau"
     is_friendly: bool = True
     map_x: float
     map_y: float
