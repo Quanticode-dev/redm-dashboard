@@ -84,9 +84,6 @@ export default function Dashboard({ user, setUser }) {
         </div>
       </header>
 
-      {/* Spacer for fixed header */}
-      <div style={{ height: '92px' }}></div>
-
       {/* Main Content */}
       <Routes>
         <Route path="/" element={
