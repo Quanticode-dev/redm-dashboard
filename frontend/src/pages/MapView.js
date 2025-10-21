@@ -56,7 +56,36 @@ export default function MapView({ user }) {
 
   useEffect(() => {
     loadMarkers();
-  }, []);
+    
+    // Add wheel event listener with passive: false
+    const container = containerRef.current;
+    if (container) {
+      const wheelHandler = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const delta = e.deltaY * -0.001;
+        const newScale = Math.min(Math.max(0.5, scale + delta), 3);
+        
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        const scaleChange = newScale / scale;
+        const newX = mouseX - (mouseX - position.x) * scaleChange;
+        const newY = mouseY - (mouseY - position.y) * scaleChange;
+        
+        setScale(newScale);
+        setPosition({ x: newX, y: newY });
+      };
+      
+      container.addEventListener('wheel', wheelHandler, { passive: false });
+      
+      return () => {
+        container.removeEventListener('wheel', wheelHandler);
+      };
+    }
+  }, [scale, position]);
 
   const loadMarkers = async () => {
     try {
