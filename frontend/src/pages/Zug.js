@@ -115,12 +115,16 @@ export default function Zug({ user }) {
 
   return (
     <div style={{
-      minHeight: 'calc(100vh - 92px)',
-      padding: '24px',
+      minHeight: '100vh',
+      paddingTop: '116px', // Navbar height (92px) + padding (24px)
+      paddingLeft: '24px',
+      paddingRight: '24px',
+      paddingBottom: '24px',
       backgroundImage: 'url(https://customer-assets.emergentagent.com/job_huntersdashboard/artifacts/ye2xkd5e_back.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed'
+      backgroundAttachment: 'fixed',
+      marginTop: '-92px' // Negative margin to pull content under fixed navbar
     }}>
       {/* Header with Clock */}
       <h1 style={{
