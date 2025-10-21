@@ -306,13 +306,13 @@ export default function MapView({ user }) {
                   boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
                 }}
               />
-              {/* Label */}
+              {/* Label - rechts neben dem Marker */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '20px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
+                  left: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
                   whiteSpace: 'nowrap',
                   background: 'rgba(0, 0, 0, 0.85)',
                   color: marker.is_friendly ? '#f4e8d0' : '#ef4444',
@@ -321,7 +321,7 @@ export default function MapView({ user }) {
                   fontSize: '13px',
                   fontWeight: 'bold',
                   border: '1px solid rgba(139, 115, 85, 0.5)',
-                  pointerEvents: 'none',
+                  pointerEvents: 'all',
                   boxShadow: '0 2px 4px rgba(0,0,0,0.3)'
                 }}
               >
