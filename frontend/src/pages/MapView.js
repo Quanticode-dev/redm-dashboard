@@ -211,11 +211,11 @@ export default function MapView({ user }) {
   };
 
   return (
-    <div style={{ width: '100%', overflow: 'hidden', background: '#2a2419' }}>
+    <div style={{ width: '100%', height: '100%', overflow: 'hidden', background: '#2a2419', position: 'relative' }}>
       <div
         ref={containerRef}
         className="cursor-move"
-        style={{ width: '100%', height: 'calc(100vh - 90px)', touchAction: 'none' }}
+        style={{ width: '100%', height: '100%', touchAction: 'none', overflow: 'hidden' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
