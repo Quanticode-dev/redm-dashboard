@@ -270,7 +270,7 @@ export default function MapView({ user }) {
           ))}
         </div>
       </div>
-
+      
       {/* Instructions */}
       <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '250px' }}>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Steuerung</h3>
