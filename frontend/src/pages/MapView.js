@@ -284,7 +284,7 @@ export default function MapView({ user }) {
       </div>
 
       {/* Instructions */}
-      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '250px' }}>
+      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '250px', zIndex: 1000 }}>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Steuerung</h3>
         <ul className="text-xs space-y-1 mb-3" style={{ color: '#6d5838' }}>
           <li>• <strong>Rechtsklick:</strong> Marker hinzufügen/bearbeiten</li>
