@@ -105,7 +105,7 @@ export default function Dashboard({ user, setUser }) {
           </div>
         } />
         <Route path="/hunter" element={hasPermission("hunter") ? <Hunter user={user} /> : <div className="text-center text-white p-8">Keine Berechtigung</div>} />
-        <Route path="/map" element={hasPermission("map") ? <div style={{ height: 'calc(100vh - 92px)', overflow: 'hidden' }}><MapView user={user} /></div> : <div className="text-center text-white p-8">Keine Berechtigung</div>} />
+        <Route path="/map" element={hasPermission("map") ? <div style={{ height: 'calc(100vh - 92px)', overflow: 'hidden', marginTop: '-4px' }}><MapView user={user} /></div> : <div className="text-center text-white p-8">Keine Berechtigung</div>} />
         <Route path="/zug" element={hasPermission("zug") ? <div className="text-center text-white p-8">Zug - Wird später hinzugefügt</div> : <div className="text-center text-white p-8">Keine Berechtigung</div>} />
         <Route path="/profile" element={<Profile user={user} />} />
         {user.is_admin && <Route path="/admin" element={<AdminPanel />} />}
