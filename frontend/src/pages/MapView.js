@@ -196,7 +196,7 @@ export default function MapView({ user }) {
   };
 
   return (
-    <div className="h-screen w-full overflow-hidden relative" style={{ background: '#2a2419' }}>
+    <div className="fixed inset-0 overflow-hidden" style={{ background: '#2a2419' }}>
       <div
         ref={containerRef}
         className="w-full h-full cursor-move"
