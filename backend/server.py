@@ -100,6 +100,31 @@ class ProtocolLog(BaseModel):
     is_personal_use: bool = False  # For "Eigenbedarf"
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
+class MapMarker(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    type: str  # "person", "gebaeude", "material"
+    is_friendly: bool = True
+    map_x: float
+    map_y: float
+    created_by: str
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class MapMarkerCreate(BaseModel):
+    name: str
+    type: str
+    is_friendly: bool = True
+    map_x: float
+    map_y: float
+
+class MapMarkerUpdate(BaseModel):
+    name: Optional[str] = None
+    type: Optional[str] = None
+    is_friendly: Optional[bool] = None
+    map_x: Optional[float] = None
+    map_y: Optional[float] = None
+
 # --- Helper Functions ---
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
