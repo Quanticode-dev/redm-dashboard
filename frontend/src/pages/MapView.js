@@ -34,6 +34,26 @@ export default function MapView({ user }) {
   const mapRef = useRef(null);
   const containerRef = useRef(null);
 
+  const getMarkerColor = (type) => {
+    switch(type) {
+      case 'person': return '#3b82f6'; // Blau
+      case 'gebaeude': return '#22c55e'; // Grün
+      case 'ankauf': return '#eab308'; // Gelb
+      case 'abbau': return '#f97316'; // Orange
+      default: return '#3b82f6';
+    }
+  };
+
+  const getMarkerLabel = (type) => {
+    switch(type) {
+      case 'person': return 'Person';
+      case 'gebaeude': return 'Gebäude';
+      case 'ankauf': return 'Ankauf';
+      case 'abbau': return 'Abbau';
+      default: return type;
+    }
+  };
+
   useEffect(() => {
     loadMarkers();
   }, []);
