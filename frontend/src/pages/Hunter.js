@@ -605,7 +605,7 @@ export default function Hunter({ user }) {
 
       {/* Custom Delete Confirmation Dialog */}
       <AlertDialog open={deleteDialog.open} onOpenChange={(open) => !open && setDeleteDialog({ open: false, type: null, id: null, name: "" })}>
-        <AlertDialogContent className="rdr-card border-4 border-[#8b7355]">
+        <AlertDialogContent className="rdr-card border-4 border-[#8b7355]" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', maxWidth: '500px' }}>
           <AlertDialogHeader>
             <AlertDialogTitle className="text-2xl font-bold" style={{ color: '#3d2f1f', fontFamily: 'Crimson Text, serif' }}>
               {deleteDialog.type === 'item' ? 'Item löschen?' : 'Protokoll-Eintrag löschen?'}
