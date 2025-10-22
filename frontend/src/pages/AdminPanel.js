@@ -125,6 +125,16 @@ export default function AdminPanel() {
                 />
               </div>
               <div>
+                <Label style={{ color: '#3d2f1f' }}>Anzeigename (optional)</Label>
+                <Input
+                  data-testid="new-user-displayname"
+                  value={newUser.display_name}
+                  onChange={(e) => setNewUser({...newUser, display_name: e.target.value})}
+                  className="rdr-input w-full"
+                  placeholder="Leer lassen für Benutzername"
+                />
+              </div>
+              <div>
                 <Label style={{ color: '#3d2f1f' }}>Passwort</Label>
                 <Input
                   data-testid="new-user-password"
