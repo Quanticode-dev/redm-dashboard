@@ -223,6 +223,20 @@ async def change_password(password_data: PasswordChange, current_user: dict = De
     await db.users.update_one({"id": current_user["id"]}, {"$set": {"password_hash": new_hash}})
     return {"message": "Password changed successfully"}
 
+@api_router.put("/users/me/display-name")
+async def update_display_name(data: dict, current_user: dict = Depends(get_current_user)):
+    display_name = data.get("display_name", "").strip()
+    
+    if not display_name:
+        raise HTTPException(status_code=400, detail="Display name cannot be empty")
+    
+    await db.users.update_one(
+        {"id": current_user["id"]},
+        {"$set": {"display_name": display_name}}
+    )
+    
+    return {"message": "Display name updated successfully"}
+
 # --- Admin User Management Routes ---
 @api_router.get("/admin/users", response_model=List[User])
 async def get_all_users(admin_user: dict = Depends(get_admin_user)):
