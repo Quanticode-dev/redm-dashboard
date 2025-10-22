@@ -515,7 +515,7 @@ export default function Hunter({ user }) {
               </p>
             ) : (
               <>
-                <div className="space-y-3 mb-4 scroll-container" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                <div className="space-y-3 mb-4 scroll-container" style={{ maxHeight: '450px', overflowY: 'auto' }}>
                   {saleItems.map((item) => (
                     <div key={item.id} className="p-3 rounded" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                       <div className="flex justify-between items-start mb-2">
