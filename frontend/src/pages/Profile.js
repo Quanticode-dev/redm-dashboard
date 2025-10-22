@@ -13,6 +13,8 @@ export default function Profile({ user }) {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [displayName, setDisplayName] = useState(user.display_name || user.username);
+  const [isEditingDisplayName, setIsEditingDisplayName] = useState(false);
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
