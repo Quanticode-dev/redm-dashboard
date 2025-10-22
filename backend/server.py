@@ -348,6 +348,7 @@ async def update_stock(stock_data: StockUpdate, current_user: dict = Depends(get
     log = ProtocolLog(
         user_id=current_user["id"],
         username=current_user["username"],
+        display_name=current_user.get("display_name", current_user["username"]),
         item_name=item["name"],
         action=action,
         quantity=abs(stock_data.quantity),
