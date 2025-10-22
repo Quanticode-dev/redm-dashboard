@@ -429,7 +429,7 @@ export default function Hunter({ user }) {
               </div>
             )}
 
-            <div className="space-y-3 scroll-container" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+            <div className="space-y-3 scroll-container" style={{ maxHeight: '800px', overflowY: 'auto' }}>
               {inventory.map((item) => (
                 <div key={item.id} className="p-4 rounded" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   {editingItem?.id === item.id ? (
