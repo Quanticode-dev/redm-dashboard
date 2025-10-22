@@ -275,7 +275,7 @@ export default function MapView({ user }) {
             width: '2048px',
             height: '2048px',
             position: 'absolute',
-            backgroundImage: 'url(https://customer-assets.emergentagent.com/job_hunterdash/artifacts/pcgsxul4_map_rdr2.png)',
+            backgroundImage: 'url(/assets/img/map_rdr2.png)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             pointerEvents: 'none'

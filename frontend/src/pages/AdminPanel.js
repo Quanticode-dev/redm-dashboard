@@ -17,6 +17,7 @@ export default function AdminPanel() {
   const [newUser, setNewUser] = useState({
     username: "",
     password: "",
+    display_name: "",
     is_admin: false,
     permissions: []
   });
@@ -43,7 +44,7 @@ export default function AdminPanel() {
     try {
       await axios.post(`${API}/admin/users`, newUser);
       toast.success("Benutzer erstellt");
-      setNewUser({ username: "", password: "", is_admin: false, permissions: [] });
+      setNewUser({ username: "", password: "", display_name: "", is_admin: false, permissions: [] });
       setShowAddForm(false);
       loadUsers();
     } catch (err) {
@@ -121,6 +122,16 @@ export default function AdminPanel() {
                   value={newUser.username}
                   onChange={(e) => setNewUser({...newUser, username: e.target.value})}
                   className="rdr-input w-full"
+                />
+              </div>
+              <div>
+                <Label style={{ color: '#3d2f1f' }}>Anzeigename (optional)</Label>
+                <Input
+                  data-testid="new-user-displayname"
+                  value={newUser.display_name}
+                  onChange={(e) => setNewUser({...newUser, display_name: e.target.value})}
+                  className="rdr-input w-full"
+                  placeholder="Leer lassen für Benutzername"
                 />
               </div>
               <div>

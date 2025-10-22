@@ -39,6 +39,7 @@ class User(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     username: str
+    display_name: str = ""  # Anzeigename für die UI
     is_admin: bool = False
     permissions: List[str] = []  # "hunter", "map", "zug"
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -46,6 +47,7 @@ class User(BaseModel):
 class UserCreate(BaseModel):
     username: str
     password: str
+    display_name: str = ""
     is_admin: bool = False
     permissions: List[str] = []
 
@@ -185,6 +187,7 @@ async def register(user_data: UserCreate):
     
     user_obj = User(
         username=user_data.username,
+        display_name=user_data.display_name if user_data.display_name else user_data.username,  # Fallback to username
         is_admin=user_data.is_admin,
         permissions=user_data.permissions
     )
@@ -219,6 +222,20 @@ async def change_password(password_data: PasswordChange, current_user: dict = De
     new_hash = hash_password(password_data.new_password)
     await db.users.update_one({"id": current_user["id"]}, {"$set": {"password_hash": new_hash}})
     return {"message": "Password changed successfully"}
+
+@api_router.put("/users/me/display-name")
+async def update_display_name(data: dict, current_user: dict = Depends(get_current_user)):
+    display_name = data.get("display_name", "").strip()
+    
+    if not display_name:
+        raise HTTPException(status_code=400, detail="Display name cannot be empty")
+    
+    await db.users.update_one(
+        {"id": current_user["id"]},
+        {"$set": {"display_name": display_name}}
+    )
+    
+    return {"message": "Display name updated successfully"}
 
 # --- Admin User Management Routes ---
 @api_router.get("/admin/users", response_model=List[User])

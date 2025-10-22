@@ -35,8 +35,8 @@ export default function Dashboard({ user, setUser }) {
       <header className="fixed top-0 left-0 right-0 z-50 leather-texture border-b-4 border-[#8b7355] p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold" style={{ color: '#f4e8d0', fontFamily: 'Pirata One, cursive' }}>Hunter Dashboard</h1>
-            <p className="text-sm" style={{ color: '#d4c5a9' }}>Willkommen, {user.username}</p>
+            <h1 className="text-3xl font-bold" style={{ color: '#f4e8d0', fontFamily: 'Pirata One, cursive' }}>RedM Dashboard</h1>
+            <p className="text-sm" style={{ color: '#d4c5a9' }}>Willkommen, {user.display_name || user.username}</p>
           </div>
           
           <div className="flex items-center gap-3">
