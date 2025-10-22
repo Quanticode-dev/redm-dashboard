@@ -321,7 +321,7 @@ export default function MapView({ user }) {
                   width: '16px',
                   height: '16px',
                   borderRadius: '50%',
-                  background: getMarkerColor(marker.type),
+                  background: getMarkerColor(marker.type, marker.is_friendly),
                   border: '3px solid #000',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
                 }}
