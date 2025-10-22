@@ -96,6 +96,7 @@ class ProtocolLog(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     user_id: str
     username: str
+    display_name: str = ""
     item_name: str
     action: str  # "added" or "removed"
     quantity: int
