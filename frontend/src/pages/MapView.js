@@ -36,7 +36,12 @@ export default function MapView({ user }) {
   const containerRef = useRef(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  const getMarkerColor = (type) => {
+  const getMarkerColor = (type, isFriendly = true) => {
+    // Wenn nicht freundlich, immer rot
+    if (!isFriendly) {
+      return '#ef4444'; // Rot
+    }
+    
     switch(type) {
       case 'person': return '#3b82f6'; // Blau
       case 'gebaeude': return '#22c55e'; // Grün
@@ -317,7 +322,7 @@ export default function MapView({ user }) {
                   width: '16px',
                   height: '16px',
                   borderRadius: '50%',
-                  background: getMarkerColor(marker.type),
+                  background: getMarkerColor(marker.type, marker.is_friendly),
                   border: '3px solid #ffffffff',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
                 }}
@@ -331,7 +336,7 @@ export default function MapView({ user }) {
                   transform: 'translateY(-50%)',
                   whiteSpace: 'nowrap',
                   background: 'rgba(0, 0, 0, 0.85)',
-                  color: marker.is_friendly ? '#ef4444' : '#ef4444',
+                  color: marker.is_friendly ? '#f4e8d0' : '#ef4444',
                   padding: '3px 10px',
                   borderRadius: '3px',
                   fontSize: '13px',
