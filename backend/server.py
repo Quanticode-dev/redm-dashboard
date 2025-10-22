@@ -39,6 +39,7 @@ class User(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     username: str
+    display_name: str = ""  # Anzeigename für die UI
     is_admin: bool = False
     permissions: List[str] = []  # "hunter", "map", "zug"
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -46,6 +47,7 @@ class User(BaseModel):
 class UserCreate(BaseModel):
     username: str
     password: str
+    display_name: str = ""
     is_admin: bool = False
     permissions: List[str] = []
 
