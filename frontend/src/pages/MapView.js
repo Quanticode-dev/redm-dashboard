@@ -318,7 +318,7 @@ export default function MapView({ user }) {
                   height: '16px',
                   borderRadius: '50%',
                   background: getMarkerColor(marker.type),
-                  border: '3px solid #000',
+                  border: '3px solid #ffffffff',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
                 }}
               />
@@ -326,7 +326,7 @@ export default function MapView({ user }) {
               <div
                 style={{
                   position: 'absolute',
-                  left: '12px',
+                  left: '15px',
                   top: '50%',
                   transform: 'translateY(-50%)',
                   whiteSpace: 'nowrap',
