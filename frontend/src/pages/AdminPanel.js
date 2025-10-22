@@ -17,6 +17,7 @@ export default function AdminPanel() {
   const [newUser, setNewUser] = useState({
     username: "",
     password: "",
+    display_name: "",
     is_admin: false,
     permissions: []
   });
