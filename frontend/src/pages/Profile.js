@@ -43,6 +43,18 @@ export default function Profile({ user }) {
     }
   };
 
+  const handleChangeDisplayName = async () => {
+    try {
+      await axios.put(`${API}/users/me/display-name`, { display_name: displayName });
+      toast.success("Anzeigename erfolgreich geändert");
+      setIsEditingDisplayName(false);
+      // Reload page to update navbar
+      window.location.reload();
+    } catch (err) {
+      toast.error(err.response?.data?.detail || "Fehler beim Ändern des Anzeigenamens");
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-8">
       <Button
