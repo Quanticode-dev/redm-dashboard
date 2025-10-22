@@ -573,7 +573,7 @@ export default function Hunter({ user }) {
         <div>
           <div className="rdr-card">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
-            <div className="space-y-2 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
+            <div className="space-y-2 scroll-container" style={{ maxHeight: '800px', overflowY: 'auto' }}>
               {protocol.map((log) => (
                 <div key={log.id} className="p-3 rounded text-sm flex justify-between items-start" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   <div className="flex-1">
