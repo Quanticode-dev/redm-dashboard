@@ -44,7 +44,7 @@ export default function AdminPanel() {
     try {
       await axios.post(`${API}/admin/users`, newUser);
       toast.success("Benutzer erstellt");
-      setNewUser({ username: "", password: "", is_admin: false, permissions: [] });
+      setNewUser({ username: "", password: "", display_name: "", is_admin: false, permissions: [] });
       setShowAddForm(false);
       loadUsers();
     } catch (err) {
