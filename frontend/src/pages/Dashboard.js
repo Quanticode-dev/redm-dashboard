@@ -36,7 +36,7 @@ export default function Dashboard({ user, setUser }) {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold" style={{ color: '#f4e8d0', fontFamily: 'Pirata One, cursive' }}>Hunter Dashboard</h1>
-            <p className="text-sm" style={{ color: '#d4c5a9' }}>Willkommen, {user.username}</p>
+            <p className="text-sm" style={{ color: '#d4c5a9' }}>Willkommen, {user.display_name || user.username}</p>
           </div>
           
           <div className="flex items-center gap-3">
