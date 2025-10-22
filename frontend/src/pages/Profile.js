@@ -70,8 +70,43 @@ export default function Profile({ user }) {
         <h2 className="text-2xl font-bold mb-6" style={{ color: '#3d2f1f' }}>Profil</h2>
         
         <div className="mb-8 p-4 rounded" style={{ background: 'rgba(139, 115, 85, 0.15)' }}>
-          <p className="text-sm" style={{ color: '#6d5838' }}>Benutzername</p>
+          <p className="text-sm" style={{ color: '#6d5838' }}>Benutzername (Login)</p>
           <p className="text-xl font-bold" style={{ color: '#3d2f1f' }}>{user.username}</p>
+          
+          <p className="text-sm mt-4" style={{ color: '#6d5838' }}>Anzeigename</p>
+          {isEditingDisplayName ? (
+            <div className="flex gap-2 mt-2">
+              <Input
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                className="rdr-input flex-1"
+                placeholder="Ihr Anzeigename"
+              />
+              <Button onClick={handleChangeDisplayName} className="rdr-button">
+                Speichern
+              </Button>
+              <Button 
+                onClick={() => {
+                  setDisplayName(user.display_name || user.username);
+                  setIsEditingDisplayName(false);
+                }} 
+                className="rdr-button"
+                style={{ background: 'linear-gradient(to bottom, #8b4513 0%, #6b3410 100%)' }}
+              >
+                Abbrechen
+              </Button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 mt-2">
+              <p className="text-xl font-bold" style={{ color: '#3d2f1f' }}>{user.display_name || user.username}</p>
+              <Button 
+                onClick={() => setIsEditingDisplayName(true)} 
+                className="rdr-button text-sm"
+              >
+                Bearbeiten
+              </Button>
+            </div>
+          )}
           
           <p className="text-sm mt-4" style={{ color: '#6d5838' }}>Rolle</p>
           <p className="text-lg font-semibold" style={{ color: '#3d2f1f' }}>
