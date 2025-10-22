@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
+import mapRdr2 from "../assets/img/map_rdr2.png";
 
 export default function MapView({ user }) {
   const [markers, setMarkers] = useState([]);
@@ -275,7 +276,7 @@ export default function MapView({ user }) {
             width: '2048px',
             height: '2048px',
             position: 'absolute',
-            backgroundImage: 'url(/assets/img/map_rdr2.png)',
+            backgroundImage: `url(${mapRdr2})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             pointerEvents: 'none'

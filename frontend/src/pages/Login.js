@@ -31,8 +31,8 @@ export default function Login({ setUser }) {
       <div className="w-full max-w-md">
         <div className="rdr-card p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2" style={{ color: '#3d2f1f', fontFamily: 'Pirata One, cursive' }}>Hunter Dashboard</h1>
-            <p className="text-sm" style={{ color: '#6d5838' }}>Willkommen zurück, Jäger</p>
+            <h1 className="text-4xl font-bold mb-2" style={{ color: '#3d2f1f', fontFamily: 'Pirata One, cursive' }}>RedM Dashboard</h1>
+            <p className="text-sm" style={{ color: '#6d5838' }}>Willkommen zurück, Homie!</p>
           </div>
           
           <form onSubmit={handleLogin} className="space-y-6">
