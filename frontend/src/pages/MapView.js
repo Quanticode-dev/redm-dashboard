@@ -240,19 +240,19 @@ export default function MapView({ user }) {
         <h3 className="font-bold mb-2 mt-3" style={{ color: '#3d2f1f' }}>Legende</h3>
         <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #ffffffff' }} />
             <span>Person</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #ffffffff' }} />
             <span>Gebäude</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #ffffffff' }} />
             <span>Ankauf</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #ffffffff' }} />
             <span>Abbau</span>
           </div>
         </div>
@@ -331,7 +331,7 @@ export default function MapView({ user }) {
                   transform: 'translateY(-50%)',
                   whiteSpace: 'nowrap',
                   background: 'rgba(0, 0, 0, 0.85)',
-                  color: marker.is_friendly ? '#f4e8d0' : '#ef4444',
+                  color: marker.is_friendly ? '#ef4444' : '#ef4444',
                   padding: '3px 10px',
                   borderRadius: '3px',
                   fontSize: '13px',
