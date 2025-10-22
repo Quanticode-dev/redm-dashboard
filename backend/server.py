@@ -187,6 +187,7 @@ async def register(user_data: UserCreate):
     
     user_obj = User(
         username=user_data.username,
+        display_name=user_data.display_name if user_data.display_name else user_data.username,  # Fallback to username
         is_admin=user_data.is_admin,
         permissions=user_data.permissions
     )
