@@ -35,7 +35,12 @@ export default function MapView({ user }) {
   const containerRef = useRef(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  const getMarkerColor = (type) => {
+  const getMarkerColor = (type, isFriendly = true) => {
+    // Wenn nicht freundlich, immer rot
+    if (!isFriendly) {
+      return '#ef4444'; // Rot
+    }
+    
     switch(type) {
       case 'person': return '#3b82f6'; // Blau
       case 'gebaeude': return '#22c55e'; // Grün
