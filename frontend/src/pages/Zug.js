@@ -176,15 +176,16 @@ export default function Zug({ user }) {
             marginBottom: '24px'
           }}>
             <tbody>
-              {/* Title Row - No toggle button */}
+              {/* Title Row - Bündig mit Tabelle */}
               <tr style={{ background: 'transparent' }}>
-                <td colSpan="25" style={{
+                <td colSpan={route.stations.length} style={{
                   border: 'none',
                   background: 'transparent',
                   color: '#f4e8d0',
                   fontSize: '20px',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
-                  padding: '10px 12px'
+                  padding: '10px 0',
+                  textAlign: 'left'
                 }}>
                   <b>{route.title} - <font color="#d4c5a9">{route.time}</font></b>
                 </td>
