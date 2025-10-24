@@ -196,7 +196,7 @@ export default function Zug({ user }) {
                   <tr>
                     {route.stations.map((station, idx) => (
                       <td key={idx} style={{
-                        border: '1px solid #aa6b1d',
+                        border: '1px solid #8b7355',
                         padding: '0',
                         textAlign: 'center',
                         height: '40px',
@@ -204,9 +204,10 @@ export default function Zug({ user }) {
                         fontSize: 'clamp(12.5px, 1.375vw, 17.5px)',
                         whiteSpace: 'nowrap',
                         borderRadius: '4px',
-                        background: '#c7a86a',
+                        background: 'rgba(199, 168, 106, 0.3)',
                         overflow: 'hidden',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        color: '#f4e8d0'
                       }}>
                         {station === null ? (
                           <img 
@@ -230,7 +231,7 @@ export default function Zug({ user }) {
                   <tr>
                     {route.data.map((cell, idx) => (
                       <td key={idx} style={{
-                        border: '1px solid #aa6b1d',
+                        border: '1px solid #8b7355',
                         padding: '0',
                         textAlign: 'center',
                         height: '40px',
@@ -238,9 +239,9 @@ export default function Zug({ user }) {
                         fontSize: 'clamp(12.5px, 1.375vw, 17.5px)',
                         whiteSpace: 'nowrap',
                         borderRadius: '4px',
-                        background: '#c7a86a',
+                        background: 'rgba(199, 168, 106, 0.2)',
                         overflow: 'hidden',
-                        color: 'brown',
+                        color: '#d4c5a9',
                         fontWeight: 'bold'
                       }}>
                         {cell}
