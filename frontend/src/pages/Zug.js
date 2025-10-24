@@ -177,7 +177,7 @@ export default function Zug({ user }) {
             width: 'auto',
             borderCollapse: 'separate',
             borderSpacing: '1px',
-            tableLayout: 'auto',
+            tableLayout: 'fixed',
             background: 'transparent',
             marginBottom: '24px'
           }}>
