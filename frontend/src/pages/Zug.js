@@ -126,7 +126,7 @@ export default function Zug({ user }) {
       bottom: 0
     }}>
       {/* Legende - oben links wie bei der Map */}
-      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '300px', zIndex: 1000 }}>
+      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '300px', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', zIndex: 1000 }}>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f', fontFamily: 'Chinese Rocks, cursive', fontSize: '18px' }}>
           Whitmore Railroads
         </h3>
@@ -135,9 +135,21 @@ export default function Zug({ user }) {
         </p>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Routen</h3>
         <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
-          <div>• 11 Zugstrecken</div>
-          <div>• Routen auf-/zuklappen</div>
-          <div>• Live-Uhrzeit</div>
+          {routes.map((route, index) => (
+            <button
+              key={route.id}
+              onClick={() => toggleRoute(route.id)}
+              className="w-full text-left px-2 py-1 rounded hover:bg-opacity-70 transition-colors"
+              style={{
+                background: expandedRoutes[route.id] ? 'rgba(139, 115, 85, 0.3)' : 'transparent',
+                border: expandedRoutes[route.id] ? '1px solid #8b7355' : '1px solid transparent',
+                color: '#3d2f1f',
+                fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal'
+              }}
+            >
+              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split(' - ')[0]}
+            </button>
+          ))}
         </div>
       </div>
 
