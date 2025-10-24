@@ -153,7 +153,7 @@ export default function Zug({ user }) {
                 lineHeight: '1.3'
               }}
             >
-              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split('[')[0].trim().replace('/g', 'G')}
+              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split('[')[0].trim().replace('/g', 'G')} <span style={{ color: '#8b7355' }}>{route.time}</span>
             </button>
           ))}
         </div>
