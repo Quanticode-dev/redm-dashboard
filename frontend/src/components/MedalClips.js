@@ -3,7 +3,6 @@ import axios from "axios";
 
 const MEDAL_API_KEY = "pub_mXEadtO97REnSauc5K6fv81Tae7ZaB2T";
 const MEDAL_SEARCH_URL = "https://developers.medal.tv/v1/search";
-const CATEGORY_ID = "2gEBKR396v"; // Red Dead Redemption 2
 
 export default function MedalClips() {
   const [clips, setClips] = useState({
