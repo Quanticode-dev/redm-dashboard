@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const MEDAL_API_KEY = "pub_mXEadtO97REnSauc5K6fv81Tae7ZaB2T";
-const MEDAL_SEARCH_URL = "https://developers.medal.tv/v1/search";
+const MEDAL_LATEST_URL = "https://developers.medal.tv/v1/latest";
 
 export default function MedalClips() {
   const [clips, setClips] = useState({
@@ -17,41 +17,63 @@ export default function MedalClips() {
 
   const fetchClips = async () => {
     try {
-      const users = ["quxntwxn", "krokofox"];
+      const users = [
+        { username: "quxntwxn", userId: "406391704" },
+        { username: "krokofox", userId: null } // Will use search for this one
+      ];
+
       const clipsData = {};
 
-      for (const username of users) {
+      for (const user of users) {
         try {
-          // Search for clips mentioning the username (without category filter)
-          const response = await axios.get(MEDAL_SEARCH_URL, {
-            headers: {
-              "Authorization": MEDAL_API_KEY,
-              "Content-Type": "application/json"
-            },
-            params: {
-              text: username,
-              limit: 50,
-              width: 640,
-              height: 360,
-              autoplay: 0,
-              muted: 1
-            }
-          });
+          if (user.userId) {
+            // Use latest API with userId
+            const response = await axios.get(MEDAL_LATEST_URL, {
+              headers: {
+                "Authorization": MEDAL_API_KEY,
+                "Content-Type": "application/json"
+              },
+              params: {
+                userId: user.userId,
+                limit: 3,
+                width: 640,
+                height: 360,
+                autoplay: 0,
+                muted: 1
+              }
+            });
 
-          // Filter to get clips from the specific user
-          const userClips = response.data.contentObjects
-            .filter(clip => {
-              const creditsLower = (clip.credits || "").toLowerCase();
-              const urlMatch = creditsLower.includes(`medal.tv/users/${username.toLowerCase()}`);
-              const nameMatch = creditsLower.includes(username.toLowerCase());
-              return urlMatch || nameMatch;
-            })
-            .slice(0, 3);
+            clipsData[user.username] = response.data.contentObjects || [];
+          } else {
+            // Fallback to search for users without userId
+            const searchUrl = "https://developers.medal.tv/v1/search";
+            const response = await axios.get(searchUrl, {
+              headers: {
+                "Authorization": MEDAL_API_KEY,
+                "Content-Type": "application/json"
+              },
+              params: {
+                text: user.username,
+                limit: 50,
+                width: 640,
+                height: 360,
+                autoplay: 0,
+                muted: 1
+              }
+            });
 
-          clipsData[username] = userClips;
+            const userClips = response.data.contentObjects
+              .filter(clip => {
+                const creditsLower = (clip.credits || "").toLowerCase();
+                return creditsLower.includes(user.username.toLowerCase());
+              })
+              .slice(0, 3);
+
+            clipsData[user.username] = userClips;
+          }
         } catch (err) {
-          console.error(`Error fetching clips for ${username}:`, err);
-          clipsData[username] = [];
+          console.error(`Error fetching clips for ${user.username}:`, err);
+          clipsData[user.username] = [];
         }
       }
 
