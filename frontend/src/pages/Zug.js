@@ -175,10 +175,9 @@ export default function Zug({ user }) {
         {routes.map((route) => (
           <table key={route.id} style={{
             width: 'auto',
-            maxWidth: 'calc(100vw - 400px)',
             borderCollapse: 'separate',
             borderSpacing: '4px',
-            tableLayout: 'auto',
+            tableLayout: 'fixed',
             background: 'transparent',
             marginBottom: '24px'
           }}>
