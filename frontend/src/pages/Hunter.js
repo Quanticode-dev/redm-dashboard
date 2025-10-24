@@ -589,7 +589,13 @@ export default function Hunter({ user }) {
                       </p>
                     )}
                     <p className="text-xs" style={{ color: '#8b7355' }}>
-                      {new Date(log.timestamp).toLocaleString('de-DE')}
+                      {new Date(log.timestamp).toLocaleString('de-DE', { 
+                        day: '2-digit', 
+                        month: '2-digit', 
+                        year: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })}
                     </p>
                   </div>
                   {user.is_admin && (
