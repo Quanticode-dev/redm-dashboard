@@ -130,8 +130,11 @@ export default function Zug({ user }) {
         <h3 className="font-bold mb-3" style={{ color: '#3d2f1f', fontFamily: 'Chinese Rocks, cursive', fontSize: '18px' }}>
           Whitmore Railroads
         </h3>
+        <p className="text-xs" style={{ color: '#6d5838' }}>
+          {currentTime.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' })}
+        </p>
         <p className="text-sm mb-4" style={{ color: '#3d2f1f', fontWeight: 'bold' }}>
-          {formatTime(currentTime)}
+          {currentTime.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </p>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Routen</h3>
         <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
