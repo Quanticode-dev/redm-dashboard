@@ -74,7 +74,7 @@ export default function MedalClips() {
   return (
     <div className="max-w-7xl mx-auto px-8 pb-8">
       <h2 className="text-2xl font-bold mb-6" style={{ color: '#f4e8d0' }}>
-        🎮 Neueste Medal Clips - Red Dead Redemption 2
+        🎮 Neueste Medal Clips
       </h2>
 
       {/* quxntwxn Clips */}
