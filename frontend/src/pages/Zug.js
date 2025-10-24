@@ -193,7 +193,7 @@ export default function Zug({ user }) {
                   padding: '10px 0',
                   textAlign: 'left'
                 }}>
-                  <b>{route.title} - <font color="#d4c5a9">{route.time}</font></b>
+                  <b>{route.title.split(' - ').slice(1).join(' - ')} - <font color="#d4c5a9">{route.time}</font></b>
                 </td>
               </tr>
 
