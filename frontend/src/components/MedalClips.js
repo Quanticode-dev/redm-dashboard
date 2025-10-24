@@ -19,7 +19,7 @@ export default function MedalClips() {
     try {
       const users = [
         { username: "quxntwxn", userId: "406391704" },
-        { username: "krokofox", userId: null } // Will use search for this one
+        { username: "krokofox", userId: "467149053" }
       ];
 
       const clipsData = {};
