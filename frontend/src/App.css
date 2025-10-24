@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Pirata+One&family=Inter:wght@400;500;600&display=swap');
 
+@keyframes textWave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes textShine {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(139, 115, 85, 0.8);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

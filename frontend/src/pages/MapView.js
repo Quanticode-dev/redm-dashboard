@@ -244,19 +244,19 @@ export default function MapView({ user }) {
         <h3 className="font-bold mb-2 mt-3" style={{ color: '#3d2f1f' }}>Legende</h3>
         <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #ffffffff' }} />
             <span>Person</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #ffffffff' }} />
             <span>Gebäude</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #ffffffff' }} />
             <span>Ankauf</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #000' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #ffffffff' }} />
             <span>Abbau</span>
           </div>
         </div>
@@ -322,7 +322,7 @@ export default function MapView({ user }) {
                   height: '16px',
                   borderRadius: '50%',
                   background: getMarkerColor(marker.type, marker.is_friendly),
-                  border: '3px solid #000',
+                  border: '3px solid #ffffffff',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
                 }}
               />
