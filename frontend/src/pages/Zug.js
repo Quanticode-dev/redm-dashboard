@@ -147,7 +147,7 @@ export default function Zug({ user }) {
                 fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal'
               }}
             >
-              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split(' - ')[0]}
+              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split(' - ').slice(1).join(' - ')}
             </button>
           ))}
         </div>
