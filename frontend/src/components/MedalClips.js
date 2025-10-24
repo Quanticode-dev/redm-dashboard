@@ -337,7 +337,7 @@ export default function MedalClips() {
                     <span>❤️ {clip.contentLikes}</span>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         ) : (
