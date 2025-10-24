@@ -22,7 +22,7 @@ export default function MedalClips() {
 
       for (const username of users) {
         try {
-          // Search for clips mentioning the username
+          // Search for clips mentioning the username (without category filter)
           const response = await axios.get(MEDAL_SEARCH_URL, {
             headers: {
               "Authorization": MEDAL_API_KEY,
@@ -30,7 +30,6 @@ export default function MedalClips() {
             },
             params: {
               text: username,
-              categoryId: CATEGORY_ID,
               limit: 50,
               width: 640,
               height: 360,
