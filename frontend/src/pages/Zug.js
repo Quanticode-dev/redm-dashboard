@@ -167,11 +167,11 @@ export default function Zug({ user }) {
         right: 0,
         bottom: 0,
         overflowY: 'auto',
-        overflowX: 'auto',
+        overflowX: 'hidden',
         padding: '24px',
         paddingLeft: '360px' // Mehr Platz für die Legende
       }}>
-        <div style={{ maxWidth: 'none', minWidth: 'min-content' }}>
+        <div style={{ maxWidth: 'none' }}>
         {routes.map((route) => (
           <table key={route.id} style={{
             width: '100%',
