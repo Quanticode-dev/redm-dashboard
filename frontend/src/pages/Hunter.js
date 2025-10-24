@@ -582,6 +582,7 @@ export default function Hunter({ user }) {
                     <p style={{ color: '#6d5838' }}>
                       {log.action === 'added' ? '✓' : '✗'} {log.quantity}x {log.item_name}
                       {log.is_personal_use && <span className="ml-2 text-xs px-2 py-0.5 rounded" style={{ background: '#8b7355', color: '#f4e8d0' }}>Eigenbedarf</span>}
+                      {log.is_sale && <span className="ml-2 text-xs px-2 py-0.5 rounded" style={{ background: '#22c55e', color: '#fff' }}>💰 Verkauf</span>}
                     </p>
                     <p className="text-xs" style={{ color: '#8b7355' }}>
                       {new Date(log.timestamp).toLocaleString('de-DE')}
