@@ -207,12 +207,11 @@ export default function Zug({ user }) {
                         textAlign: 'center',
                         height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: '14px',
+                        fontSize: 'clamp(10px, 1vw, 14px)',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         fontWeight: 'bold',
-                        color: '#3d2f1f',
-                        width: '85px'
+                        color: '#3d2f1f'
                       }}>
                         {station === null ? (
                           <img 
