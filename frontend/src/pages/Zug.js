@@ -214,7 +214,9 @@ export default function Zug({ user }) {
                         background: 'rgba(199, 168, 106, 0.3)',
                         overflow: 'hidden',
                         fontWeight: 'bold',
-                        color: '#f4e8d0'
+                        color: '#f4e8d0',
+                        minWidth: '60px',
+                        width: '80px'
                       }}>
                         {station === null ? (
                           <img 
