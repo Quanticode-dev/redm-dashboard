@@ -127,10 +127,10 @@ export default function Zug({ user }) {
     }}>
       {/* Legende - oben links wie bei der Map */}
       <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '300px', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', zIndex: 1000 }}>
-        <h3 className="font-bold mb-2" style={{ color: '#3d2f1f', fontFamily: 'Chinese Rocks, cursive', fontSize: '18px' }}>
+        <h3 className="font-bold mb-3" style={{ color: '#3d2f1f', fontFamily: 'Chinese Rocks, cursive', fontSize: '18px' }}>
           Whitmore Railroads
         </h3>
-        <p className="text-xs mb-3" style={{ color: '#6d5838' }}>
+        <p className="text-sm mb-4" style={{ color: '#3d2f1f', fontWeight: 'bold' }}>
           {formatTime(currentTime)}
         </p>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Routen</h3>
