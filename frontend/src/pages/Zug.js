@@ -144,7 +144,10 @@ export default function Zug({ user }) {
                 background: expandedRoutes[route.id] ? 'rgba(139, 115, 85, 0.3)' : 'transparent',
                 border: expandedRoutes[route.id] ? '1px solid #8b7355' : '1px solid transparent',
                 color: '#3d2f1f',
-                fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal'
+                fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal',
+                whiteSpace: 'normal',
+                wordBreak: 'break-word',
+                lineHeight: '1.3'
               }}
             >
               {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split(' - ').slice(1).join(' - ')}
