@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: 'Chinese Rocks';
-    src: url('%PUBLIC_URL%/fonts/chinese_rocks_rg.otf') format('opentype');
+    src: url('./fonts/chinese_rocks_rg.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
