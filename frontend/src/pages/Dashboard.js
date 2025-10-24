@@ -145,23 +145,26 @@ export default function Dashboard({ user, setUser }) {
       {/* Main Content */}
       <Routes>
         <Route path="/" element={
-          <div className="max-w-7xl mx-auto p-8">
-            <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#f4e8d0' }}>Bereiche</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {tiles.map((tile) => (
-                hasPermission(tile.permission) && (
-                  <button
-                    key={tile.id}
-                    data-testid={`tile-${tile.id}`}
-                    onClick={() => navigate(tile.path)}
-                    className="dashboard-tile p-8 hover:scale-105 transition-transform duration-300 cursor-pointer"
-                  >
-                    <h3 className="text-2xl font-bold text-center" style={{ color: '#3d2f1f' }}>{tile.name}</h3>
-                  </button>
-                )
-              ))}
+          <>
+            <div className="max-w-7xl mx-auto p-8">
+              <h2 className="text-3xl font-bold mb-8 text-center" style={{ color: '#f4e8d0' }}>Bereiche</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {tiles.map((tile) => (
+                  hasPermission(tile.permission) && (
+                    <button
+                      key={tile.id}
+                      data-testid={`tile-${tile.id}`}
+                      onClick={() => navigate(tile.path)}
+                      className="dashboard-tile p-8 hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    >
+                      <h3 className="text-2xl font-bold text-center" style={{ color: '#3d2f1f' }}>{tile.name}</h3>
+                    </button>
+                  )
+                ))}
+              </div>
             </div>
-          </div>
+            <MedalClips />
+          </>
         } />
         <Route path="/hunter" element={hasPermission("hunter") ? <Hunter user={user} /> : <div className="text-center text-white p-8">Keine Berechtigung</div>} />
         <Route path="/map" element={hasPermission("map") ? <div style={{ height: 'calc(100vh - 92px)', overflow: 'hidden', position: 'relative' }}><MapView user={user} /></div> : <div className="text-center text-white p-8">Keine Berechtigung</div>} />
