@@ -262,7 +262,8 @@ export default function Hunter({ user }) {
       for (const saleItem of saleItems) {
         await axios.post(`${API}/inventory/stock`, { 
           item_id: saleItem.id, 
-          quantity: -saleItem.saleQuantity 
+          quantity: -saleItem.saleQuantity,
+          is_sale: true
         });
       }
       
