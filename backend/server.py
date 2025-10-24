@@ -101,6 +101,7 @@ class ProtocolLog(BaseModel):
     action: str  # "added" or "removed"
     quantity: int
     is_personal_use: bool = False  # For "Eigenbedarf"
+    is_sale: bool = False  # For sales
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 class MapMarker(BaseModel):
