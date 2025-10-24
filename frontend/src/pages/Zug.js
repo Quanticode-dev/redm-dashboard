@@ -240,14 +240,12 @@ export default function Zug({ user }) {
                         textAlign: 'center',
                         height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: 'clamp(11px, 1.2vw, 14px)',
+                        fontSize: '14px',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         color: '#6d5838',
                         fontWeight: 'bold',
-                        minWidth: '60px',
-                        width: '85px',
-                        maxWidth: '85px'
+                        width: '85px'
                       }}>
                         {cell}
                       </td>
