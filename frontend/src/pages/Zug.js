@@ -153,7 +153,7 @@ export default function Zug({ user }) {
                 lineHeight: '1.3'
               }}
             >
-              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split(' - ').slice(1).join(' - ')}
+              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split('[')[0].trim().replace('/g', 'G')}
             </button>
           ))}
         </div>
