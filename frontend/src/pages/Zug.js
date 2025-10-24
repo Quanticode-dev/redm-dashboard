@@ -164,7 +164,7 @@ export default function Zug({ user }) {
                         key={i}
                         style={{
                           display: 'inline-block',
-                          animation: 'textWave 1.5s ease-in-out infinite',
+                          animation: 'textWave 1.5s ease-in-out infinite, textShine 1.5s ease-in-out infinite',
                           animationDelay: `${i * 0.05}s`
                         }}
                       >
