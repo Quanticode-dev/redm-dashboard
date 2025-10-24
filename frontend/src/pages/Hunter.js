@@ -430,7 +430,7 @@ export default function Hunter({ user }) {
               </div>
             )}
 
-            <div className="space-y-3 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
+            <div className="space-y-3 scroll-container" style={{ maxHeight: '706px', overflowY: 'auto' }}>
               {inventory.sort((a, b) => a.name.localeCompare(b.name)).map((item) => (
                 <div key={item.id} className="p-4 rounded" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   {editingItem?.id === item.id ? (
@@ -574,7 +574,7 @@ export default function Hunter({ user }) {
         <div style={{ height: 'fit-content' }}>
           <div className="rdr-card" style={{ height: '100%' }}>
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
-            <div className="space-y-2 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
+            <div className="space-y-2 scroll-container" style={{ maxHeight: '706px', overflowY: 'auto' }}>
               {protocol.map((log) => (
                 <div key={log.id} className="p-3 rounded text-sm flex justify-between items-start" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   <div className="flex-1">
