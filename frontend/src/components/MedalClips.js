@@ -195,13 +195,15 @@ export default function MedalClips() {
           <span>👤</span> quxntwxn
         </h3>
         {clips.quxntwxn.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {clips.quxntwxn.map((clip) => (
-              <div
+              <a
                 key={clip.contentId} 
-                onClick={() => setPlayingVideo(clip)}
-                className="rdr-card overflow-hidden hover:scale-105 transition-transform duration-200 cursor-pointer" 
-                style={{ padding: 0 }}
+                href={clip.directClipUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rdr-card overflow-hidden hover:scale-105 transition-transform duration-200" 
+                style={{ padding: 0, display: 'block', textDecoration: 'none' }}
               >
                 <div 
                   style={{ 
