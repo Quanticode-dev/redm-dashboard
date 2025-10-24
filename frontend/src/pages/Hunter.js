@@ -311,7 +311,7 @@ export default function Hunter({ user }) {
       
       <div className="grid grid-cols-1 lg:grid-cols-[3fr_4fr_3fr_3fr] gap-6">
         {/* Left Column - Calculators */}
-        <div className="space-y-6">
+        <div className="space-y-6" style={{ height: 'fit-content' }}>
           {/* Package Calculator */}
           <div className="rdr-card" data-testid="package-calculator">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>
@@ -372,8 +372,8 @@ export default function Hunter({ user }) {
         </div>
 
         {/* Middle Column - Inventory */}
-        <div>
-          <div className="rdr-card">
+        <div style={{ height: 'fit-content' }}>
+          <div className="rdr-card" style={{ height: '100%' }}>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold" style={{ color: '#3d2f1f' }}>Bestandsliste</h3>
               {user.is_admin && (
@@ -430,8 +430,8 @@ export default function Hunter({ user }) {
               </div>
             )}
 
-            <div className="space-y-3 scroll-container" style={{ maxHeight: '698px', overflowY: 'auto' }}>
-              {inventory.map((item) => (
+            <div className="space-y-3 scroll-container" style={{ maxHeight: '696px', overflowY: 'auto' }}>
+              {inventory.sort((a, b) => a.name.localeCompare(b.name)).map((item) => (
                 <div key={item.id} className="p-4 rounded" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   {editingItem?.id === item.id ? (
                     <div className="space-y-2">
@@ -506,8 +506,8 @@ export default function Hunter({ user }) {
         </div>
 
         {/* Sales Calculator */}
-        <div>
-          <div className="rdr-card">
+        <div style={{ height: 'fit-content' }}>
+          <div className="rdr-card" style={{ height: '100%' }}>
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Verkaufsrechner</h3>
             
             {saleItems.length === 0 ? (
@@ -571,21 +571,25 @@ export default function Hunter({ user }) {
         </div>
 
         {/* Right Column - Protocol */}
-        <div>
-          <div className="rdr-card">
+        <div style={{ height: 'fit-content' }}>
+          <div className="rdr-card" style={{ height: '100%' }}>
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
-            <div className="space-y-2 scroll-container" style={{ maxHeight: '695px', overflowY: 'auto' }}>
+            <div className="space-y-2 scroll-container" style={{ maxHeight: '696px', overflowY: 'auto' }}>
               {protocol.map((log) => (
                 <div key={log.id} className="p-3 rounded text-sm flex justify-between items-start" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   <div className="flex-1">
                     <p className="font-bold" style={{ color: '#3d2f1f' }}>{log.display_name || log.username}</p>
                     <p style={{ color: '#6d5838' }}>
                       {log.action === 'added' ? '✓' : '✗'} {log.quantity}x {log.item_name}
-                      {log.is_personal_use && <span className="ml-2 text-xs px-2 py-0.5 rounded" style={{ background: '#8b7355', color: '#f4e8d0' }}>Eigenbedarf</span>}
                     </p>
+                    {log.is_personal_use && (
+                      <p>
+                        <span className="text-xs px-2 py-0.5 rounded" style={{ background: '#8b7355', color: '#f4e8d0' }}>Eigenbedarf</span>
+                      </p>
+                    )}
                     {log.is_sale && (
                       <p>
-                        <span className="text-xs px-2 py-0.5 rounded" style={{ background: '#22c55e', color: '#fff' }}>💰 Verkauf</span>
+                        <span className="text-xs px-2 py-0.5 rounded" style={{ background: '#22c55e', color: '#fff' }}>Verkauf</span>
                       </p>
                     )}
                     <p className="text-xs" style={{ color: '#8b7355' }}>
