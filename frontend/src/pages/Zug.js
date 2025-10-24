@@ -115,33 +115,45 @@ export default function Zug({ user }) {
 
   return (
     <div style={{
-      minHeight: '100vh',
-      padding: '24px',
-      backgroundImage: 'url(https://customer-assets.emergentagent.com/job_huntersdashboard/artifacts/ye2xkd5e_back.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed'
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      background: '#2a2419',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
     }}>
-      {/* Header with Clock */}
-      <h1 style={{
-        fontFamily: 'Pirata One, cursive',
-        fontSize: '3rem',
-        fontWeight: '700',
-        color: '#000',
-        marginBottom: '24px',
-        textShadow: '2px 2px 2px rgba(0,0,0,0.3)'
-      }}>
-        Whitmore Railroads - Routen&nbsp;
-        <span style={{
-          fontFamily: 'Comic Sans MS, cursive, sans-serif',
-          fontSize: '2rem'
-        }}>
+      {/* Legende - oben links wie bei der Map */}
+      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '300px', zIndex: 1000 }}>
+        <h3 className="font-bold mb-2" style={{ color: '#3d2f1f', fontFamily: 'Chinese Rocks, cursive', fontSize: '18px' }}>
+          Whitmore Railroads
+        </h3>
+        <p className="text-xs mb-3" style={{ color: '#6d5838' }}>
           {formatTime(currentTime)}
-        </span>
-      </h1>
+        </p>
+        <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Routen</h3>
+        <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
+          <div>• 11 Zugstrecken</div>
+          <div>• Routen auf-/zuklappen</div>
+          <div>• Live-Uhrzeit</div>
+        </div>
+      </div>
 
-      {/* Routes Tables */}
-      <div style={{ display: 'grid', gap: '24px' }}>
+      {/* Scrollbarer Routen-Container */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        padding: '24px',
+        paddingLeft: '320px' // Platz für die Legende
+      }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         {routes.map((route) => (
           <table key={route.id} style={{
             width: '100%',
