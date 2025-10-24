@@ -90,6 +90,7 @@ class StockUpdate(BaseModel):
     item_id: str
     quantity: int  # positive for add, negative for remove
     is_personal_use: bool = False  # For "Eigenbedarf"
+    is_sale: bool = False  # For sales
 
 class ProtocolLog(BaseModel):
     model_config = ConfigDict(extra="ignore")
