@@ -144,7 +144,11 @@ export default function Zug({ user }) {
               onClick={() => toggleRoute(route.id)}
               className="w-full text-left px-2 py-1 rounded hover:bg-opacity-70 transition-colors"
               style={{
-                background: expandedRoutes[route.id] ? 'rgba(139, 115, 85, 0.3)' : 'transparent',
+                background: expandedRoutes[route.id] 
+                  ? 'linear-gradient(90deg, rgba(139, 115, 85, 0.4) 0%, rgba(139, 115, 85, 0.2) 50%, rgba(139, 115, 85, 0.4) 100%)'
+                  : 'transparent',
+                backgroundSize: expandedRoutes[route.id] ? '200% 100%' : 'auto',
+                animation: expandedRoutes[route.id] ? 'wave 2s ease-in-out infinite' : 'none',
                 border: expandedRoutes[route.id] ? '1px solid #8b7355' : '1px solid transparent',
                 color: '#3d2f1f',
                 fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal',
