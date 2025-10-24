@@ -239,12 +239,11 @@ export default function Zug({ user }) {
                         textAlign: 'center',
                         height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: '14px',
+                        fontSize: 'clamp(10px, 1vw, 14px)',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         color: '#6d5838',
-                        fontWeight: 'bold',
-                        width: '85px'
+                        fontWeight: 'bold'
                       }}>
                         {cell}
                       </td>
