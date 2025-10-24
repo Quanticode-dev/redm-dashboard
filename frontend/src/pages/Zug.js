@@ -138,28 +138,46 @@ export default function Zug({ user }) {
         </p>
         <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Routen</h3>
         <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
-          {routes.map((route, index) => (
-            <button
-              key={route.id}
-              onClick={() => toggleRoute(route.id)}
-              className="w-full text-left px-2 py-1 rounded hover:bg-opacity-70 transition-colors"
-              style={{
-                background: expandedRoutes[route.id] 
-                  ? 'linear-gradient(90deg, rgba(139, 115, 85, 0.4) 0%, rgba(139, 115, 85, 0.2) 50%, rgba(139, 115, 85, 0.4) 100%)'
-                  : 'transparent',
-                backgroundSize: expandedRoutes[route.id] ? '200% 100%' : 'auto',
-                animation: expandedRoutes[route.id] ? 'wave 2s ease-in-out infinite' : 'none',
-                border: expandedRoutes[route.id] ? '1px solid #8b7355' : '1px solid transparent',
-                color: '#3d2f1f',
-                fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal',
-                whiteSpace: 'normal',
-                wordBreak: 'break-word',
-                lineHeight: '1.3'
-              }}
-            >
-              {expandedRoutes[route.id] ? '▼' : '▶'} {route.title.split('[')[0].trim().replace('/g', 'G')} <span style={{ color: '#8b7355' }}>{route.time}</span>
-            </button>
-          ))}
+          {routes.map((route, index) => {
+            const routeText = `${route.title.split('[')[0].trim().replace('/g', 'G')} ${route.time}`;
+            
+            return (
+              <button
+                key={route.id}
+                onClick={() => toggleRoute(route.id)}
+                className="w-full text-left px-2 py-1 rounded hover:bg-opacity-70 transition-colors"
+                style={{
+                  background: expandedRoutes[route.id] ? 'rgba(139, 115, 85, 0.3)' : 'transparent',
+                  border: expandedRoutes[route.id] ? '1px solid #8b7355' : '1px solid transparent',
+                  color: '#3d2f1f',
+                  fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal',
+                  whiteSpace: 'normal',
+                  wordBreak: 'break-word',
+                  lineHeight: '1.3'
+                }}
+              >
+                {expandedRoutes[route.id] ? '▼' : '▶'} 
+                {expandedRoutes[route.id] ? (
+                  <span>
+                    {routeText.split('').map((char, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          display: 'inline-block',
+                          animation: 'textWave 1.5s ease-in-out infinite',
+                          animationDelay: `${i * 0.05}s`
+                        }}
+                      >
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    ))}
+                  </span>
+                ) : (
+                  <span>{routeText}</span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 
