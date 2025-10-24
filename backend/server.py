@@ -90,6 +90,7 @@ class StockUpdate(BaseModel):
     item_id: str
     quantity: int  # positive for add, negative for remove
     is_personal_use: bool = False  # For "Eigenbedarf"
+    is_sale: bool = False  # For sales
 
 class ProtocolLog(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -101,6 +102,7 @@ class ProtocolLog(BaseModel):
     action: str  # "added" or "removed"
     quantity: int
     is_personal_use: bool = False  # For "Eigenbedarf"
+    is_sale: bool = False  # For sales
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 class MapMarker(BaseModel):
@@ -353,7 +355,8 @@ async def update_stock(stock_data: StockUpdate, current_user: dict = Depends(get
         item_name=item["name"],
         action=action,
         quantity=abs(stock_data.quantity),
-        is_personal_use=stock_data.is_personal_use
+        is_personal_use=stock_data.is_personal_use,
+        is_sale=stock_data.is_sale
     )
     await db.protocol.insert_one(log.model_dump())
     

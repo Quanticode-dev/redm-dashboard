@@ -13,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import mapRdr2 from "../assets/img/map_rdr2.png";
 
 export default function MapView({ user }) {
   const [markers, setMarkers] = useState([]);
@@ -86,7 +85,7 @@ export default function MapView({ user }) {
         e.stopPropagation();
         
         const delta = e.deltaY * -0.001;
-        const newScale = Math.min(Math.max(0.5, scale + delta), 3);
+        const newScale = Math.min(Math.max(0.3, scale + delta), 5);
         
         const rect = container.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
@@ -245,19 +244,19 @@ export default function MapView({ user }) {
         <h3 className="font-bold mb-2 mt-3" style={{ color: '#3d2f1f' }}>Legende</h3>
         <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #ffffffff' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', border: '2px solid #000' }} />
             <span>Person</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #ffffffff' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '2px solid #000' }} />
             <span>Gebäude</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #ffffffff' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#eab308', border: '2px solid #000' }} />
             <span>Ankauf</span>
           </div>
           <div className="flex items-center gap-2">
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #ffffffff' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f97316', border: '2px solid #000' }} />
             <span>Abbau</span>
           </div>
         </div>
@@ -281,7 +280,7 @@ export default function MapView({ user }) {
             width: '2048px',
             height: '2048px',
             position: 'absolute',
-            backgroundImage: `url(${mapRdr2})`,
+            backgroundImage: 'url(https://customer-assets.emergentagent.com/job_hunterdash/artifacts/pcgsxul4_map_rdr2.png)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             pointerEvents: 'none'
@@ -323,7 +322,7 @@ export default function MapView({ user }) {
                   height: '16px',
                   borderRadius: '50%',
                   background: getMarkerColor(marker.type, marker.is_friendly),
-                  border: '3px solid #ffffffff',
+                  border: '3px solid #000',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.6)'
                 }}
               />
@@ -331,7 +330,7 @@ export default function MapView({ user }) {
               <div
                 style={{
                   position: 'absolute',
-                  left: '17px',
+                  left: '12px',
                   top: '50%',
                   transform: 'translateY(-50%)',
                   whiteSpace: 'nowrap',

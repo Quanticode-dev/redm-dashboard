@@ -5,12 +5,14 @@ import Profile from "./Profile";
 import AdminPanel from "./AdminPanel";
 import MapView from "./MapView";
 import Zug from "./Zug";
-import { LogOut, User, Shield } from "lucide-react";
+import { LogOut, User, Shield, Menu, X } from "lucide-react";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Dashboard({ user, setUser }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -35,11 +37,12 @@ export default function Dashboard({ user, setUser }) {
       <header className="fixed top-0 left-0 right-0 z-50 leather-texture border-b-4 border-[#8b7355] p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold" style={{ color: '#f4e8d0', fontFamily: 'Rye, serif' }}>RedM Dashboard</h1>
-            <p className="text-sm" style={{ color: '#d4c5a9' }}>Willkommen, {user.display_name || user.username}</p>
+            <h1 className="text-2xl md:text-3xl font-bold" style={{ color: '#f4e8d0', fontFamily: 'Chinese Rocks, cursive' }}>RedM Dashboard</h1>
+            <p className="text-xs md:text-sm" style={{ color: '#d4c5a9' }}>Willkommen, {user.display_name || user.username}</p>
           </div>
           
-          <div className="flex items-center gap-3">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-3">
             <Button
               data-testid="dashboard-button"
               onClick={() => navigate("/")}
@@ -81,7 +84,58 @@ export default function Dashboard({ user, setUser }) {
               Abmelden
             </Button>
           </div>
+
+          {/* Mobile Hamburger Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{ color: '#f4e8d0' }}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 space-y-2">
+            <Button
+              onClick={() => { navigate("/"); setMobileMenuOpen(false); }}
+              className="rdr-button w-full flex items-center justify-start gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              Dashboard
+            </Button>
+            
+            <Button
+              onClick={() => { navigate("/profile"); setMobileMenuOpen(false); }}
+              className="rdr-button w-full flex items-center justify-start gap-2"
+            >
+              <User size={16} />
+              Profil
+            </Button>
+            
+            {user.is_admin && (
+              <Button
+                onClick={() => { navigate("/admin"); setMobileMenuOpen(false); }}
+                className="rdr-button w-full flex items-center justify-start gap-2"
+              >
+                <Shield size={16} />
+                Admin
+              </Button>
+            )}
+            
+            <Button
+              onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+              className="rdr-button w-full flex items-center justify-start gap-2"
+            >
+              <LogOut size={16} />
+              Abmelden
+            </Button>
+          </div>
+        )}
       </header>
 
       {/* Spacer for fixed navbar */}

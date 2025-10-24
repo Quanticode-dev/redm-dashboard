@@ -262,7 +262,8 @@ export default function Hunter({ user }) {
       for (const saleItem of saleItems) {
         await axios.post(`${API}/inventory/stock`, { 
           item_id: saleItem.id, 
-          quantity: -saleItem.saleQuantity 
+          quantity: -saleItem.saleQuantity,
+          is_sale: true
         });
       }
       
@@ -515,7 +516,7 @@ export default function Hunter({ user }) {
               </p>
             ) : (
               <>
-                <div className="space-y-3 mb-4 scroll-container" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                <div className="space-y-3 mb-4 scroll-container" style={{ maxHeight: '450px', overflowY: 'auto' }}>
                   {saleItems.map((item) => (
                     <div key={item.id} className="p-3 rounded" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                       <div className="flex justify-between items-start mb-2">
@@ -573,7 +574,7 @@ export default function Hunter({ user }) {
         <div>
           <div className="rdr-card">
             <h3 className="text-xl font-bold mb-4" style={{ color: '#3d2f1f' }}>Protokoll</h3>
-            <div className="space-y-2 scroll-container" style={{ maxHeight: '700px', overflowY: 'auto' }}>
+            <div className="space-y-2 scroll-container" style={{ maxHeight: '695px', overflowY: 'auto' }}>
               {protocol.map((log) => (
                 <div key={log.id} className="p-3 rounded text-sm flex justify-between items-start" style={{ background: 'rgba(244, 232, 208, 0.5)' }}>
                   <div className="flex-1">
@@ -582,8 +583,19 @@ export default function Hunter({ user }) {
                       {log.action === 'added' ? '✓' : '✗'} {log.quantity}x {log.item_name}
                       {log.is_personal_use && <span className="ml-2 text-xs px-2 py-0.5 rounded" style={{ background: '#8b7355', color: '#f4e8d0' }}>Eigenbedarf</span>}
                     </p>
+                    {log.is_sale && (
+                      <p>
+                        <span className="text-xs px-2 py-0.5 rounded" style={{ background: '#22c55e', color: '#fff' }}>💰 Verkauf</span>
+                      </p>
+                    )}
                     <p className="text-xs" style={{ color: '#8b7355' }}>
-                      {new Date(log.timestamp).toLocaleString('de-DE')}
+                      {new Date(log.timestamp).toLocaleString('de-DE', { 
+                        day: '2-digit', 
+                        month: '2-digit', 
+                        year: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })}
                     </p>
                   </div>
                   {user.is_admin && (
