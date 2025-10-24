@@ -107,10 +107,14 @@ export default function MedalClips() {
         {clips.quxntwxn.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {clips.quxntwxn.map((clip) => (
-              <div key={clip.contentId} className="rdr-card overflow-hidden">
+              <div key={clip.contentId} className="rdr-card overflow-hidden" style={{ padding: 0 }}>
                 <div 
                   dangerouslySetInnerHTML={{ __html: clip.embedIframeCode }}
-                  className="w-full"
+                  style={{ 
+                    width: '100%', 
+                    aspectRatio: '16/9',
+                    overflow: 'hidden'
+                  }}
                 />
                 <div className="p-3">
                   <p className="font-semibold text-sm line-clamp-2" style={{ color: '#3d2f1f' }}>
