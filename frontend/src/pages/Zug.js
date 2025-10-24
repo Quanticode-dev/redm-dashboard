@@ -251,7 +251,9 @@ export default function Zug({ user }) {
                         background: 'rgba(199, 168, 106, 0.2)',
                         overflow: 'hidden',
                         color: '#d4c5a9',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        minWidth: '60px',
+                        width: '80px'
                       }}>
                         {cell}
                       </td>
