@@ -330,7 +330,7 @@ export default function MapView({ user }) {
               <div
                 style={{
                   position: 'absolute',
-                  left: '12px',
+                  left: '19px',
                   top: '50%',
                   transform: 'translateY(-50%)',
                   whiteSpace: 'nowrap',
