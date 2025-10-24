@@ -584,7 +584,7 @@ export default function Hunter({ user }) {
                       {log.is_personal_use && <span className="ml-2 text-xs px-2 py-0.5 rounded" style={{ background: '#8b7355', color: '#f4e8d0' }}>Eigenbedarf</span>}
                     </p>
                     {log.is_sale && (
-                      <p className="mt-1">
+                      <p>
                         <span className="text-xs px-2 py-0.5 rounded" style={{ background: '#22c55e', color: '#fff' }}>💰 Verkauf</span>
                       </p>
                     )}
