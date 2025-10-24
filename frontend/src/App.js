@@ -9,7 +9,6 @@ import { Toaster } from "./components/ui/sonner";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || window.location.origin; // Fallback
 export const API = `${BACKEND_URL}/api`;
 
-
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);

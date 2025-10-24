@@ -51,14 +51,14 @@ export default function Zug({ user }) {
     {
       id: 3,
       title: "/g3 - Mega Runde [SD-VH-AB-BCC-WLL-RGG-G1-MZ-MAC-G2-AD-BP-AD-MAC-BW-G1-FLT-RHO-SD]",
-      time: "[XXmin]",
+      time: "",
       stations: ["no SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "MZ", null, "MAC", null, "G2", null, "AD", null, "BP", null, "AD", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
       data: ["", "R", "", "", "20 R", "40", "L 10", "40", "", "L ❘ R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ L", "L", "", "", "25 R", "", "R 25", "", "", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "R ❘ L"]
     },
     {
       id: 4,
       title: "/g4 - Zentral Runde [SD-EM-OIL-VAL-FLT-G1-MZ-MAC-BW-G1-FLT-RHO-SD]",
-      time: "[XXmin]",
+      time: "",
       stations: ["sw SD", null, "EM", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "MZ", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
       data: ["R", "", "L", "", "R", "", "", "R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "R ❘ L"]
     },
@@ -72,28 +72,28 @@ export default function Zug({ user }) {
     {
       id: 6,
       title: "/g6 - !TEST! Ost Runde [SD-VH-AB-BCC-WLL-RGG-G1-MZ-MAC-BW-G1-FLT-RHO-SD]",
-      time: "[XXmin]",
+      time: "",
       stations: ["no SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "MZ", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
       data: ["", "R", "", "", "20 R", "40", "L 10", "40", "", "L ❘ R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "L ❘ R"]
     },
     {
       id: 7,
       title: "/g7 - !TEST! Östliche Zentralrunde [SD-OIL-VAL-FLT-G1-MZ-MAC-BW-G1-FLT-RHO-SD]",
-      time: "[XXmin]",
+      time: "",
       stations: ["no SD", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "MZ", null, "MAC", null, "BW", null, "G1", null, "FLT", null, "RHO", null, "SD"],
       data: ["", "L ➸ R", "", "", "", "R", "", "", "L ➸ R", "", "", "30 Tu", "", "R ➸ R", "20", "", "R ➸ R", "", "R", "", "", "", "L ❘ R"]
     },
     {
       id: 8,
       title: "/g8 - Kleine BW Ost Runde [BW-G1-FLT-RHO-SD-OIL-VAL-FLT-G1-BW]",
-      time: "[XXmin]",
+      time: "",
       stations: ["n BW", null, "G1", null, "FLT", null, "RHO", null, "SD", null, "OIL", null, "VAL", null, "FLT", null, "G1", null, "BW"],
       data: ["20", "", "R ➸ R", "", "R", "", "", "", "L ❘ R", "L ➸ R", "", "", "", "R", "", "", "L ➸ L", "", "20"]
     },
     {
       id: 9,
       title: "/g9 - !TEST! Große Black Water Ost Runde [BW-G1-FLT-RHO-SD-VH-AB-BCC-WLL-RGG-G1-BW]",
-      time: "[XXmin]",
+      time: "",
       stations: ["n BW", null, "G1", null, "FLT", null, "RHO", null, "SD", null, "VH", null, "AB", null, "BCC", null, "WLL", null, "RGG", null, "G1", null, "BW"],
       data: ["20", "", "R>R", "", "R", "", "", "", "L|R", "R", "", "", "20R", "40", "L 10", "40", "", "L|R", "", "", "R>L", "", "20"]
     },
@@ -115,75 +115,108 @@ export default function Zug({ user }) {
 
   return (
     <div style={{
-      minHeight: '100vh',
-      padding: '24px',
-      backgroundImage: 'url(https://customer-assets.emergentagent.com/job_huntersdashboard/artifacts/ye2xkd5e_back.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed'
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      background: '#2a2419',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
     }}>
-      {/* Header with Clock */}
-      <h1 style={{
-        fontFamily: 'Pirata One, cursive',
-        fontSize: '3rem',
-        fontWeight: '700',
-        color: '#000',
-        marginBottom: '24px',
-        textShadow: '2px 2px 2px rgba(0,0,0,0.3)'
-      }}>
-        Whitmore Railroads - Routen&nbsp;
-        <span style={{
-          fontFamily: 'Comic Sans MS, cursive, sans-serif',
-          fontSize: '2rem'
-        }}>
-          {formatTime(currentTime)}
-        </span>
-      </h1>
+      {/* Legende - oben links wie bei der Map */}
+      <div className="absolute top-4 left-4 rdr-card p-4" style={{ maxWidth: '300px', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto', zIndex: 1000 }}>
+        <h3 className="font-bold mb-3" style={{ color: '#3d2f1f', fontFamily: 'Chinese Rocks, cursive', fontSize: '18px' }}>
+          Whitmore Railroads
+        </h3>
+        <p className="text-xs" style={{ color: '#6d5838' }}>
+          {currentTime.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' })}
+        </p>
+        <p className="text-sm mb-4" style={{ color: '#3d2f1f', fontWeight: 'bold' }}>
+          {currentTime.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+        </p>
+        <h3 className="font-bold mb-2" style={{ color: '#3d2f1f' }}>Routen</h3>
+        <div className="space-y-1 text-xs" style={{ color: '#6d5838' }}>
+          {routes.map((route, index) => {
+            const routeText = `${route.title.split('[')[0].trim().replace('/g', 'G')} ${route.time}`;
+            
+            return (
+              <button
+                key={route.id}
+                onClick={() => toggleRoute(route.id)}
+                className="w-full text-left px-2 py-1 rounded hover:bg-opacity-70 transition-colors"
+                style={{
+                  background: expandedRoutes[route.id] ? 'rgba(139, 115, 85, 0.3)' : 'transparent',
+                  border: expandedRoutes[route.id] ? '1px solid #8b7355' : '1px solid transparent',
+                  color: '#3d2f1f',
+                  fontWeight: expandedRoutes[route.id] ? 'bold' : 'normal',
+                  whiteSpace: 'normal',
+                  wordBreak: 'break-word',
+                  lineHeight: '1.3'
+                }}
+              >
+                {expandedRoutes[route.id] ? '▼' : '▶'} 
+                {expandedRoutes[route.id] ? (
+                  <span>
+                    {routeText.split('').map((char, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          display: 'inline-block',
+                          animation: 'textWave 1.5s ease-in-out infinite, textShine 1.5s ease-in-out infinite',
+                          animationDelay: `${i * 0.05}s`
+                        }}
+                      >
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    ))}
+                  </span>
+                ) : (
+                  <span>{routeText}</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-      {/* Routes Tables */}
-      <div style={{ display: 'grid', gap: '24px' }}>
+      {/* Scrollbarer Routen-Container */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        padding: '24px',
+        paddingLeft: '360px' // Mehr Platz für die Legende
+      }}>
+        <div style={{ maxWidth: 'none' }}>
         {routes.map((route) => (
           <table key={route.id} style={{
-            width: '100%',
+            width: 'auto',
+            maxWidth: '100%',
             borderCollapse: 'separate',
-            borderSpacing: '1px',
+            borderSpacing: '4px',
             tableLayout: 'fixed',
-            background: 'transparent'
+            background: 'transparent',
+            marginBottom: '24px'
           }}>
             <tbody>
-              {/* Control Row */}
+              {/* Title Row - Bündig mit Tabelle */}
               <tr style={{ background: 'transparent' }}>
-                <td colSpan="25" style={{
+                <td colSpan={route.stations.length} style={{
                   border: 'none',
                   background: 'transparent',
-                  color: '#000',
-                  fontSize: '23px',
-                  textShadow: '1px 1px 1px #b78f60'
+                  color: '#f4e8d0',
+                  fontSize: '20px',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+                  padding: '10px 0',
+                  textAlign: 'left'
                 }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.6rem',
-                    padding: '10px 12px'
-                  }}>
-                    <button
-                      onClick={() => toggleRoute(route.id)}
-                      style={{
-                        appearance: 'none',
-                        border: '1px solid #fff',
-                        background: '#c7a86a',
-                        borderRadius: '6px',
-                        padding: '4px 10px',
-                        fontSize: '16px',
-                        lineHeight: '1',
-                        cursor: 'pointer',
-                        minWidth: '30px'
-                      }}
-                    >
-                      {expandedRoutes[route.id] ? '−' : '+'}
-                    </button>
-                    <b>{route.title} - <font color="brown">{route.time}</font></b>
-                  </div>
+                  <b>{route.title.split(' - ').slice(1).join(' - ')}</b>
                 </td>
               </tr>
 
@@ -192,18 +225,18 @@ export default function Zug({ user }) {
                 <>
                   <tr>
                     {route.stations.map((station, idx) => (
-                      <td key={idx} style={{
-                        border: '1px solid #aa6b1d',
-                        padding: '0',
+                      <td key={idx} className="rdr-card" style={{
+                        padding: '8px',
                         textAlign: 'center',
-                        height: '40px',
+                        height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: 'clamp(12.5px, 1.375vw, 17.5px)',
+                        fontSize: '14px',
                         whiteSpace: 'nowrap',
-                        borderRadius: '4px',
-                        background: '#c7a86a',
                         overflow: 'hidden',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        color: '#3d2f1f',
+                        width: '85px',
+                        minWidth: '60px'
                       }}>
                         {station === null ? (
                           <img 
@@ -226,19 +259,18 @@ export default function Zug({ user }) {
                   {/* Data Row */}
                   <tr>
                     {route.data.map((cell, idx) => (
-                      <td key={idx} style={{
-                        border: '1px solid #aa6b1d',
-                        padding: '0',
+                      <td key={idx} className="rdr-card" style={{
+                        padding: '8px',
                         textAlign: 'center',
-                        height: '40px',
+                        height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: 'clamp(12.5px, 1.375vw, 17.5px)',
+                        fontSize: '14px',
                         whiteSpace: 'nowrap',
-                        borderRadius: '4px',
-                        background: '#c7a86a',
                         overflow: 'hidden',
-                        color: 'brown',
-                        fontWeight: 'bold'
+                        color: '#6d5838',
+                        fontWeight: 'bold',
+                        width: '85px',
+                        minWidth: '60px'
                       }}>
                         {cell}
                       </td>
@@ -249,6 +281,7 @@ export default function Zug({ user }) {
             </tbody>
           </table>
         ))}
+        </div>
       </div>
     </div>
   );
