@@ -15,6 +15,13 @@ export default function MedalClips() {
     fetchClips();
   }, []);
 
+  // Format seconds to MM:SS
+  const formatDuration = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
   const fetchClips = async () => {
     try {
       const users = [
