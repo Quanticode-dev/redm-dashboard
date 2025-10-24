@@ -102,15 +102,15 @@ export default function MedalClips() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-8 pb-8">
-      <h2 className="text-2xl font-bold mb-6" style={{ color: '#f4e8d0' }}>
+    <div className="max-w-7xl mx-auto px-8 pb-8 pt-12">
+      <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: '#f4e8d0' }}>
         🎮 Neueste Medal Clips
       </h2>
 
       {/* quxntwxn Clips */}
       <div className="mb-8">
         <h3 className="text-xl font-semibold mb-4 flex items-center gap-2" style={{ color: '#d4c5a9' }}>
-          <span>👤</span> quxntwxn
+          <span>👤</span> Quantwan
         </h3>
         {clips.quxntwxn.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
