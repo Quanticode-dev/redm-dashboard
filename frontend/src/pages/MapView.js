@@ -85,7 +85,7 @@ export default function MapView({ user }) {
         e.stopPropagation();
         
         const delta = e.deltaY * -0.001;
-        const newScale = Math.min(Math.max(0.5, scale + delta), 3);
+        const newScale = Math.min(Math.max(0.3, scale + delta), 5);
         
         const rect = container.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
