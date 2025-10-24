@@ -176,7 +176,7 @@ export default function Zug({ user }) {
           <table key={route.id} style={{
             width: 'auto',
             borderCollapse: 'separate',
-            borderSpacing: '1px',
+            borderSpacing: '4px',
             tableLayout: 'fixed',
             background: 'transparent',
             marginBottom: '24px'
