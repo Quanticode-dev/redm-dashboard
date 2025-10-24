@@ -197,13 +197,11 @@ export default function MedalClips() {
         {clips.quxntwxn.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {clips.quxntwxn.map((clip) => (
-              <a 
+              <div
                 key={clip.contentId} 
-                href={clip.directClipUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rdr-card overflow-hidden hover:scale-105 transition-transform duration-200" 
-                style={{ padding: 0, display: 'block', textDecoration: 'none' }}
+                onClick={() => setPlayingVideo(clip)}
+                className="rdr-card overflow-hidden hover:scale-105 transition-transform duration-200 cursor-pointer" 
+                style={{ padding: 0 }}
               >
                 <div 
                   style={{ 
