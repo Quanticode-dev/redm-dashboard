@@ -204,16 +204,18 @@ export default function Zug({ user }) {
                   <tr>
                     {route.stations.map((station, idx) => (
                       <td key={idx} className="rdr-card" style={{
-                        padding: '8px 4px',
+                        padding: '8px',
                         textAlign: 'center',
                         height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: 'clamp(10px, 1.2vw, 14px)',
+                        fontSize: 'clamp(11px, 1.2vw, 14px)',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         fontWeight: 'bold',
                         color: '#3d2f1f',
-                        maxWidth: '100px'
+                        minWidth: '60px',
+                        width: '85px',
+                        maxWidth: '85px'
                       }}>
                         {station === null ? (
                           <img 
