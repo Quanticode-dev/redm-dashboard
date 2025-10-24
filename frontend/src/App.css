@@ -9,6 +9,16 @@
   }
 }
 
+@keyframes textShine {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(139, 115, 85, 0.8);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
