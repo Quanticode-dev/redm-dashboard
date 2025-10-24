@@ -333,7 +333,7 @@ export default function MedalClips() {
                     <span>❤️ {clip.contentLikes}</span>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         ) : (
