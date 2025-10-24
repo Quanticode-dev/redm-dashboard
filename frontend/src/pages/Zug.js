@@ -237,18 +237,16 @@ export default function Zug({ user }) {
                   <tr>
                     {route.data.map((cell, idx) => (
                       <td key={idx} className="rdr-card" style={{
-                        padding: '8px',
+                        padding: '8px 4px',
                         textAlign: 'center',
                         height: '50px',
                         verticalAlign: 'middle',
-                        fontSize: '14px',
+                        fontSize: 'clamp(10px, 1.2vw, 14px)',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         color: '#6d5838',
                         fontWeight: 'bold',
-                        minWidth: '70px',
-                        width: '90px',
-                        margin: '2px'
+                        maxWidth: '100px'
                       }}>
                         {cell}
                       </td>
