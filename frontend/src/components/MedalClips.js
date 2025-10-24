@@ -186,15 +186,58 @@ export default function MedalClips() {
         {clips.krokofox.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {clips.krokofox.map((clip) => (
-              <div key={clip.contentId} className="rdr-card overflow-hidden" style={{ padding: 0 }}>
+              <a 
+                key={clip.contentId} 
+                href={clip.directClipUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rdr-card overflow-hidden hover:scale-105 transition-transform duration-200" 
+                style={{ padding: 0, display: 'block', textDecoration: 'none' }}
+              >
                 <div 
-                  dangerouslySetInnerHTML={{ __html: clip.embedIframeCode }}
                   style={{ 
                     width: '100%', 
                     aspectRatio: '16/9',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    position: 'relative',
+                    backgroundImage: `url(${clip.contentThumbnail})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
                   }}
-                />
+                >
+                  {/* Play button overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '50%',
+                    background: 'rgba(0,0,0,0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '24px',
+                    color: '#fff'
+                  }}>
+                    ▶
+                  </div>
+                  {/* Duration badge */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '8px',
+                    right: '8px',
+                    background: 'rgba(0,0,0,0.8)',
+                    color: '#fff',
+                    padding: '2px 6px',
+                    borderRadius: '3px',
+                    fontSize: '12px',
+                    fontWeight: 'bold'
+                  }}>
+                    {clip.videoLengthSeconds}s
+                  </div>
+                </div>
                 <div className="p-3">
                   <p className="font-semibold text-sm line-clamp-2" style={{ color: '#3d2f1f' }}>
                     {clip.contentTitle || "Untitled"}
@@ -202,19 +245,9 @@ export default function MedalClips() {
                   <div className="flex items-center gap-3 mt-2 text-xs" style={{ color: '#6d5838' }}>
                     <span>👁️ {clip.contentViews.toLocaleString()}</span>
                     <span>❤️ {clip.contentLikes}</span>
-                    <span>⏱️ {clip.videoLengthSeconds}s</span>
                   </div>
-                  <a 
-                    href={clip.directClipUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-xs mt-2 inline-block hover:underline"
-                    style={{ color: '#8b7355' }}
-                  >
-                    Auf Medal.tv ansehen →
-                  </a>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         ) : (
