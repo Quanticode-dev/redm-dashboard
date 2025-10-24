@@ -114,7 +114,7 @@ export default function MedalClips() {
           </div>
         ) : (
           <div className="rdr-card text-center py-8" style={{ color: '#8b7355' }}>
-            Keine Red Dead Redemption 2 Clips gefunden
+            Keine Clips gefunden
           </div>
         )}
       </div>
@@ -156,7 +156,7 @@ export default function MedalClips() {
           </div>
         ) : (
           <div className="rdr-card text-center py-8" style={{ color: '#8b7355' }}>
-            Keine Red Dead Redemption 2 Clips gefunden
+            Keine Clips gefunden
           </div>
         )}
       </div>
