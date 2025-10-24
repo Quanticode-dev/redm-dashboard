@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const MEDAL_API_KEY = "pub_mXEadtO97REnSauc5K6fv81Tae7ZaB2T";
-const MEDAL_API_URL = "https://developers.medal.tv/v1/latest";
+const MEDAL_SEARCH_URL = "https://developers.medal.tv/v1/search";
 const CATEGORY_ID = "2gEBKR396v"; // Red Dead Redemption 2
 
 export default function MedalClips() {
@@ -18,37 +18,42 @@ export default function MedalClips() {
 
   const fetchClips = async () => {
     try {
-      // Fetch clips for both users
-      const users = [
-        { username: "quxntwxn", userId: "quxntwxn" }, // We'll need to get the actual user IDs
-        { username: "krokofox", userId: "krokofox" }
-      ];
-
+      const users = ["quxntwxn", "krokofox"];
       const clipsData = {};
 
-      for (const user of users) {
+      for (const username of users) {
         try {
-          // First, let's try to search by username to get clips
-          const response = await axios.get(MEDAL_API_URL, {
+          // Search for clips mentioning the username
+          const response = await axios.get(MEDAL_SEARCH_URL, {
             headers: {
               "Authorization": MEDAL_API_KEY,
               "Content-Type": "application/json"
             },
             params: {
+              text: username,
               categoryId: CATEGORY_ID,
-              limit: 100 // Get more to filter by user
+              limit: 50,
+              width: 640,
+              height: 360,
+              autoplay: 0,
+              muted: 1
             }
           });
 
-          // Filter clips by username in the credits field
-          const userClips = response.data.contentObjects.filter(clip => 
-            clip.credits && clip.credits.toLowerCase().includes(user.username.toLowerCase())
-          ).slice(0, 3);
+          // Filter to get clips from the specific user
+          const userClips = response.data.contentObjects
+            .filter(clip => {
+              const creditsLower = (clip.credits || "").toLowerCase();
+              const urlMatch = creditsLower.includes(`medal.tv/users/${username.toLowerCase()}`);
+              const nameMatch = creditsLower.includes(username.toLowerCase());
+              return urlMatch || nameMatch;
+            })
+            .slice(0, 3);
 
-          clipsData[user.username] = userClips;
+          clipsData[username] = userClips;
         } catch (err) {
-          console.error(`Error fetching clips for ${user.username}:`, err);
-          clipsData[user.username] = [];
+          console.error(`Error fetching clips for ${username}:`, err);
+          clipsData[username] = [];
         }
       }
 
@@ -71,69 +76,91 @@ export default function MedalClips() {
   return (
     <div className="max-w-7xl mx-auto px-8 pb-8">
       <h2 className="text-2xl font-bold mb-6" style={{ color: '#f4e8d0' }}>
-        Neueste Medal Clips
+        🎮 Neueste Medal Clips - Red Dead Redemption 2
       </h2>
 
       {/* quxntwxn Clips */}
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-4" style={{ color: '#d4c5a9' }}>
-          quxntwxn
+        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2" style={{ color: '#d4c5a9' }}>
+          <span>👤</span> quxntwxn
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {clips.quxntwxn.length > 0 ? (
-            clips.quxntwxn.map((clip) => (
+        {clips.quxntwxn.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {clips.quxntwxn.map((clip) => (
               <div key={clip.contentId} className="rdr-card overflow-hidden">
                 <div 
                   dangerouslySetInnerHTML={{ __html: clip.embedIframeCode }}
-                  style={{ width: '100%', aspectRatio: '16/9' }}
+                  className="w-full"
                 />
                 <div className="p-3">
-                  <p className="font-semibold text-sm" style={{ color: '#3d2f1f' }}>
-                    {clip.contentTitle}
+                  <p className="font-semibold text-sm line-clamp-2" style={{ color: '#3d2f1f' }}>
+                    {clip.contentTitle || "Untitled"}
                   </p>
-                  <p className="text-xs mt-1" style={{ color: '#6d5838' }}>
-                    👁️ {clip.contentViews} • ❤️ {clip.contentLikes}
-                  </p>
+                  <div className="flex items-center gap-3 mt-2 text-xs" style={{ color: '#6d5838' }}>
+                    <span>👁️ {clip.contentViews.toLocaleString()}</span>
+                    <span>❤️ {clip.contentLikes}</span>
+                    <span>⏱️ {clip.videoLengthSeconds}s</span>
+                  </div>
+                  <a 
+                    href={clip.directClipUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-xs mt-2 inline-block hover:underline"
+                    style={{ color: '#8b7355' }}
+                  >
+                    Auf Medal.tv ansehen →
+                  </a>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-span-3 text-center py-4" style={{ color: '#8b7355' }}>
-              Keine Clips gefunden
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="rdr-card text-center py-8" style={{ color: '#8b7355' }}>
+            Keine Red Dead Redemption 2 Clips gefunden
+          </div>
+        )}
       </div>
 
       {/* krokofox Clips */}
       <div>
-        <h3 className="text-xl font-semibold mb-4" style={{ color: '#d4c5a9' }}>
-          krokofox
+        <h3 className="text-xl font-semibold mb-4 flex items-center gap-2" style={{ color: '#d4c5a9' }}>
+          <span>👤</span> krokofox
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {clips.krokofox.length > 0 ? (
-            clips.krokofox.map((clip) => (
+        {clips.krokofox.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {clips.krokofox.map((clip) => (
               <div key={clip.contentId} className="rdr-card overflow-hidden">
                 <div 
                   dangerouslySetInnerHTML={{ __html: clip.embedIframeCode }}
-                  style={{ width: '100%', aspectRatio: '16/9' }}
+                  className="w-full"
                 />
                 <div className="p-3">
-                  <p className="font-semibold text-sm" style={{ color: '#3d2f1f' }}>
-                    {clip.contentTitle}
+                  <p className="font-semibold text-sm line-clamp-2" style={{ color: '#3d2f1f' }}>
+                    {clip.contentTitle || "Untitled"}
                   </p>
-                  <p className="text-xs mt-1" style={{ color: '#6d5838' }}>
-                    👁️ {clip.contentViews} • ❤️ {clip.contentLikes}
-                  </p>
+                  <div className="flex items-center gap-3 mt-2 text-xs" style={{ color: '#6d5838' }}>
+                    <span>👁️ {clip.contentViews.toLocaleString()}</span>
+                    <span>❤️ {clip.contentLikes}</span>
+                    <span>⏱️ {clip.videoLengthSeconds}s</span>
+                  </div>
+                  <a 
+                    href={clip.directClipUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-xs mt-2 inline-block hover:underline"
+                    style={{ color: '#8b7355' }}
+                  >
+                    Auf Medal.tv ansehen →
+                  </a>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-span-3 text-center py-4" style={{ color: '#8b7355' }}>
-              Keine Clips gefunden
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="rdr-card text-center py-8" style={{ color: '#8b7355' }}>
+            Keine Red Dead Redemption 2 Clips gefunden
+          </div>
+        )}
       </div>
     </div>
   );
