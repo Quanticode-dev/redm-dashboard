@@ -191,7 +191,7 @@ export default function MedalClips() {
           <span>👤</span> krokofox
         </h3>
         {clips.krokofox.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {clips.krokofox.map((clip) => (
               <a 
                 key={clip.contentId} 
