@@ -5,12 +5,14 @@ import Profile from "./Profile";
 import AdminPanel from "./AdminPanel";
 import MapView from "./MapView";
 import Zug from "./Zug";
-import { LogOut, User, Shield } from "lucide-react";
+import { LogOut, User, Shield, Menu, X } from "lucide-react";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Dashboard({ user, setUser }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
