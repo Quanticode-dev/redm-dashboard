@@ -10,7 +10,6 @@ export default function MedalClips() {
     krokofox: []
   });
   const [loading, setLoading] = useState(true);
-  const [playingVideo, setPlayingVideo] = useState(null);
 
   useEffect(() => {
     fetchClips();
