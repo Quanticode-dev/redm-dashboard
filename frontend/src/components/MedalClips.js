@@ -158,12 +158,12 @@ export default function MedalClips() {
                     right: '8px',
                     background: 'rgba(0,0,0,0.8)',
                     color: '#fff',
-                    padding: '2px 6px',
-                    borderRadius: '3px',
-                    fontSize: '12px',
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    fontSize: '14px',
                     fontWeight: 'bold'
                   }}>
-                    {clip.videoLengthSeconds}s
+                    {formatDuration(clip.videoLengthSeconds)}
                   </div>
                 </div>
                 <div className="p-3">
