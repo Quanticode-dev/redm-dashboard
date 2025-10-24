@@ -172,42 +172,21 @@ export default function Zug({ user }) {
             borderCollapse: 'separate',
             borderSpacing: '1px',
             tableLayout: 'fixed',
-            background: 'transparent'
+            background: 'transparent',
+            marginBottom: '24px'
           }}>
             <tbody>
-              {/* Control Row */}
+              {/* Title Row - No toggle button */}
               <tr style={{ background: 'transparent' }}>
                 <td colSpan="25" style={{
                   border: 'none',
                   background: 'transparent',
-                  color: '#000',
-                  fontSize: '23px',
-                  textShadow: '1px 1px 1px #b78f60'
+                  color: '#f4e8d0',
+                  fontSize: '20px',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+                  padding: '10px 12px'
                 }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.6rem',
-                    padding: '10px 12px'
-                  }}>
-                    <button
-                      onClick={() => toggleRoute(route.id)}
-                      style={{
-                        appearance: 'none',
-                        border: '1px solid #fff',
-                        background: '#c7a86a',
-                        borderRadius: '6px',
-                        padding: '4px 10px',
-                        fontSize: '16px',
-                        lineHeight: '1',
-                        cursor: 'pointer',
-                        minWidth: '30px'
-                      }}
-                    >
-                      {expandedRoutes[route.id] ? '−' : '+'}
-                    </button>
-                    <b>{route.title} - <font color="brown">{route.time}</font></b>
-                  </div>
+                  <b>{route.title} - <font color="#d4c5a9">{route.time}</font></b>
                 </td>
               </tr>
 
