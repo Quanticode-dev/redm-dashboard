@@ -261,6 +261,7 @@ export default function Zug({ user }) {
             </tbody>
           </table>
         ))}
+        </div>
       </div>
     </div>
   );
